@@ -70,5 +70,9 @@ fabric.properties
 # Android studio 3.1+ serialized cache file
 .idea/caches/build_file_checksums.ser
 
+# PHP
+vendor
+composer.lock
+
 # Environment files with secrets
 config.*.php
