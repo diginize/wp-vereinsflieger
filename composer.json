@@ -1,0 +1,21 @@
+{
+	"name": "diginize/wp-vereinsflieger",
+	"description": "A 3rd party signin plugin to use the member's Vereinsflieger login for entering the restricted content of websites from aero clubs. ",
+	"license": "GPL-3.0-only",
+	"authors": [
+		{
+			"name": "Diginize",
+			"homepage": "https://www.github.com/diginize"
+		},
+		{
+			"name": "Silvio Kennecke",
+			"homepage": "https://www.github.com/silviokennecke"
+		}
+	],
+	"require": {
+		"diginize/vereinsflieger-api": "dev-master"
+	},
+	"autoload": {
+		"psr-4": { "Diginize\\WpVereinsflieger\\" : "src/" }
+	}
+}
