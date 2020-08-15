@@ -36,14 +36,17 @@ abstract class AbstractApi {
 
 	protected function getHttpOptions(array $mergeWith = [], bool $disableAccessToken = false) {
 		return array_merge_recursive(
-			$this->accesstoken && $disableAccessToken ? [
+			[
+				'http_errors' => false
+			],
+			$this->accesstoken && !$disableAccessToken ? [
 				'query' => ['accesstoken' => $this->accesstoken]
 			] : [],
 			$mergeWith);
 	}
 
 	protected function serializeRequestParams($params): array {
-		return json_encode($this->serializer->serialize($params, 'json'), JSON_OBJECT_AS_ARRAY);
+		return json_decode($this->serializer->serialize($params, 'json'), JSON_OBJECT_AS_ARRAY);
 	}
 
 	protected function deserializeResponse(ResponseInterface $response, string $targetType) {

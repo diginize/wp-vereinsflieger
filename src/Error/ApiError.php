@@ -4,8 +4,8 @@
 namespace Diginize\WpVereinsflieger\Error;
 
 
-use Diginize\VereinsfliegerApi\Model\VereinsfliegerErrorDto;
-use Diginize\VereinsfliegerApi\Model\VereinsfliegerExtendedErrorDto;
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\VereinsfliegerErrorDto;
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\VereinsfliegerExtendedErrorDto;
 use Throwable;
 
 class ApiError extends \Exception {
@@ -20,7 +20,7 @@ class ApiError extends \Exception {
 		if (is_string($response)) {
 			parent::__construct('Api Error:' . $response, $code, $previous);
 		} else {
-			parent::__construct('Api Error:' . $response->getError(), $response->getHttpstatuscode(), $response);
+			parent::__construct('Api Error:' . $response->getError() . "\r\n" . json_encode($response), $response->getHttpstatuscode());
 		}
 	}
 

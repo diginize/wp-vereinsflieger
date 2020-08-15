@@ -28,7 +28,7 @@ class AuthApi extends AbstractApi {
 	 */
 	public function getAccesstoken(): AccessTokenResponse {
 		try {
-			$response = $this->client->get($this->baseUrl . '/auth/accesstoken');
+			$response = $this->client->get($this->baseUrl . '/auth/accesstoken', $this->getHttpOptions([], true));
 
 			switch ($response->getStatusCode()) {
 				case 200:

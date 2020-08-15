@@ -18,7 +18,7 @@ class SignInCredentialsDto implements ISignInCredentialsDto {
 	/** @var int */
 	private $cid;
 
-	/** @var string */
+	/** @var string|null */
 	private $auth_secret;
 
 	/**
@@ -78,16 +78,16 @@ class SignInCredentialsDto implements ISignInCredentialsDto {
 	}
 
 	/**
-	 * @return string
+	 * @return string|null
 	 */
-	public function getAuthSecret(): string {
+	public function getAuthSecret(): ?string {
 		return $this->auth_secret;
 	}
 
 	/**
-	 * @param string $auth_secret
+	 * @param string|null $auth_secret
 	 */
-	public function setAuthSecret(string $auth_secret): void {
+	public function setAuthSecret(?string $auth_secret): void {
 		$this->auth_secret = $auth_secret;
 	}
 

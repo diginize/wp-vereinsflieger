@@ -23,6 +23,7 @@ class Authentication {
 
 		$this->api = new Api();
 		$this->api->init();
+		return $this->api;
 	}
 
 	/**
@@ -35,6 +36,11 @@ class Authentication {
 		// If is authenticated, allow the user to login
 		if ($user instanceof \WP_User) {
 			return $user;
+		}
+
+		// stop when no credentials were provided
+		if (!$username || !$password) {
+			return null;
 		}
 
 		// Try to login with vereinsflieger
@@ -59,14 +65,13 @@ class Authentication {
 
 			// try to find existing user with same email
 			if (!$wpUser) {
-				$wpUser = Users::getUserByEmail($userDetails->getUid());
+				$wpUser = Users::getUserByEmail($userDetails->getEmail());
 			}
 
 			// add new user
 			if (!$wpUser) {
 				$userId = Users::addVereinsfliegerUser($userDetails);
 				if (!$userId) {
-					// TODO: handle error
 					return null;
 				}
 
