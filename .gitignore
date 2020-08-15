@@ -73,6 +73,3 @@ fabric.properties
 # PHP
 vendor
 composer.lock
-
-# Environment files with secrets
-config.*.php
