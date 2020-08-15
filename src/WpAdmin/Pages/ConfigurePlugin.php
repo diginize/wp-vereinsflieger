@@ -26,13 +26,15 @@ class ConfigurePlugin extends AbstractPage {
 		if (
 			!array_key_exists('wpvf_submit', $_POST) ||
 			!array_key_exists('wpvf_cid', $_POST) ||
-			!array_key_exists('wpvf_appKey', $_POST)
+			!array_key_exists('wpvf_appKey', $_POST) ||
+			!array_key_exists('wpvf_defaultRole', $_POST)
 		) {
 			return;
 		}
 
 		Options::setCID($_POST['wpvf_cid']);
 		Options::setAppKey($_POST['wpvf_appKey']);
+		Options::setDefaultRole($_POST['wpvf_defaultRole']);
 
 		$this->addMessage('success','Die Änderungen wurden erfolgreich gespeichert.');
 	}
@@ -73,6 +75,12 @@ class ConfigurePlugin extends AbstractPage {
 							Der App Key wird benötigt, um die Schnittstelle von Vereinsflieger nutzen zu können.<br>
 							Solltest du noch keinen haben, kontaktiere bitte den Support von <a href="https://www.vereinsflieger.de/public/Kontakt.htm" target="_blank">Vereinsflieger.de</a>.
 						</p>
+					</td>
+				</tr>
+				<tr>
+					<th>Rolle für neue Nutzer</th>
+					<td>
+						<select name="wpvf_defaultRole"><?php wp_dropdown_roles( Options::getDefaultRole() ); ?></select>
 					</td>
 				</tr>
 			</table>

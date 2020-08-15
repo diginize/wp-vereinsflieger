@@ -4,9 +4,6 @@
 namespace Diginize\WpVereinsflieger\WpPublic;
 
 
-use Diginize\WpVereinsflieger\WpAdmin\Authentication;
-use Diginize\WpVereinsflieger\WpAdmin\Profile;
-
 class WpPublic {
 
 	/** @var Authentication */
@@ -22,7 +19,7 @@ class WpPublic {
 
 	private function setupDependencies(): void {
 		$this->authentication = new Authentication();
-		$this->profile = new Profile();
+		//$this->profile = new Profile();
 	}
 
 	private function setupHooks(): void {

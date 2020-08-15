@@ -20,4 +20,4 @@ register_activation_hook( __FILE__, [WpVereinsflieger::class, 'activate']);
 register_deactivation_hook( __FILE__, [WpVereinsflieger::class, 'deactivate']);
 register_uninstall_hook(__FILE__, [WpVereinsflieger::class, 'uninstall']);
 
-add_action('init', [WpVereinsflieger::class, 'init']);
+WpVereinsflieger::init();

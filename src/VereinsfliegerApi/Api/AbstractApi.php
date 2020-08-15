@@ -37,9 +37,6 @@ abstract class AbstractApi {
 
 	protected function getHttpOptions(array $mergeWith = [], bool $disableAccessToken = false) {
 		return array_merge_recursive(
-			[
-				'base_uri' => $this->baseUrl
-			],
 			$this->accesstoken && $disableAccessToken ? [
 				'query' => ['accesstoken' => $this->accesstoken]
 			] : [],
@@ -51,9 +48,7 @@ abstract class AbstractApi {
 	}
 
 	protected function deserializeResponse(ResponseInterface $response, string $targetType) {
-		return $this->serializer->deserialize($response->getBody()->getContents(), $targetType, 'json', [
-			AbstractNormalizer::ALLOW_EXTRA_ATTRIBUTES => false
-		]);
+		return $this->serializer->deserialize($response->getBody()->getContents(), $targetType, 'json');
 	}
 
 }

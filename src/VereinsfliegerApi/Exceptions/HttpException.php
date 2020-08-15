@@ -7,7 +7,7 @@ namespace Diginize\WpVereinsflieger\VereinsfliegerApi\Exceptions;
 use Psr\Http\Message\ResponseInterface;
 use Throwable;
 
-class HttpException extends \Exception {
+class HttpException extends \Exception implements Exception {
 
 	/**
 	 * HttpException constructor.

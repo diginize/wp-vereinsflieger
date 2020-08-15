@@ -9,8 +9,10 @@ use Diginize\WpVereinsflieger\Error\InvalidLoginCredentialsError;
 use Diginize\WpVereinsflieger\Error\TwoFactorAuthenticationRequiredError;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Api\AuthApi;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Exceptions\ApiException;
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Exceptions\Exception;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Exceptions\HttpException;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\AccessTokenDto;
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\IUserDto;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\SignInCredentialsDto;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\VereinsfliegerResponseDto;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\LoginFailedResponse;
@@ -99,6 +101,18 @@ class Api {
 			}
 		} finally {
 			return true;
+		}
+	}
+
+	/**
+	 * @return IUserDto
+	 * @throws ApiError
+	 */
+	function getUser(): IUserDto {
+		try {
+			return $this->auth->GetUser();
+		} catch (Exception $e) {
+			throw new ApiError($e->getMessage(), $e->getCode(), $e);
 		}
 	}
 

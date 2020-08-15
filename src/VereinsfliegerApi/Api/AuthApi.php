@@ -11,6 +11,7 @@ use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\AccessTokenResponse;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\LoginFailedResponse;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\OkResponse;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\UnauthorizedResponse;
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\UserResponse;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 
@@ -25,9 +26,9 @@ class AuthApi extends AbstractApi {
 	 * @throws HttpException
 	 * @throws ApiException
 	 */
-	public function getAccesstoken() {
+	public function getAccesstoken(): AccessTokenResponse {
 		try {
-			$response = $this->client->get('/auth/accesstoken', $this->getHttpOptions([], false));
+			$response = $this->client->get($this->baseUrl . '/auth/accesstoken');
 
 			switch ($response->getStatusCode()) {
 				case 200:
@@ -49,9 +50,9 @@ class AuthApi extends AbstractApi {
 	 * @throws HttpException
 	 * @throws ApiException
 	 */
-	public function Signin(SignInCredentialsDto $credentials) {
+	public function Signin(SignInCredentialsDto $credentials): OkResponse {
 		try {
-			$response = $this->client->post('/auth/signin', $this->getHttpOptions([
+			$response = $this->client->post($this->baseUrl . '/auth/signin', $this->getHttpOptions([
 				'form_params' => $this->serializeRequestParams($credentials)
 			]));
 
@@ -77,17 +78,47 @@ class AuthApi extends AbstractApi {
 	}
 
 	/**
-	 * @return OkResponse|UnauthorizedResponse
+	 * @return OkResponse
 	 * @throws HttpException
 	 * @throws ApiException
 	 */
-	public function Signout() {
+	public function Signout(): OkResponse {
 		try {
-			$response = $this->client->delete('/auth/signout', $this->getHttpOptions());
+			$response = $this->client->delete($this->baseUrl . '/auth/signout', $this->getHttpOptions());
 
 			switch ($response->getStatusCode()) {
 				case 200:
 					return $this->deserializeResponse($response, OkResponse::class);
+					break;
+
+				case 401:
+					throw new ApiException(
+						$response,
+						$this->deserializeResponse($response, UnauthorizedResponse::class)
+					);
+					break;
+
+				default:
+					throw new ApiException($response);
+					break;
+			}
+		} catch (GuzzleException $e) {
+			throw new HttpException($e);
+		}
+	}
+
+	/**
+	 * @return UserResponse
+	 * @throws ApiException
+	 * @throws HttpException
+	 */
+	public function GetUser(): UserResponse {
+		try {
+			$response = $this->client->post($this->baseUrl . '/auth/getuser', $this->getHttpOptions());
+
+			switch ($response->getStatusCode()) {
+				case 200:
+					return $this->deserializeResponse($response, UserResponse::class);
 					break;
 
 				case 401:

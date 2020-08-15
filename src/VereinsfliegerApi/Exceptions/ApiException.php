@@ -7,7 +7,7 @@ namespace Diginize\WpVereinsflieger\VereinsfliegerApi\Exceptions;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\VereinsfliegerErrorDto;
 use Psr\Http\Message\ResponseInterface;
 
-class ApiException extends \Exception {
+class ApiException extends \Exception implements Exception {
 
 	/** @var ResponseInterface */
 	private $response;

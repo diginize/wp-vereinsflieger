@@ -9,6 +9,8 @@ class Options {
 	private static $option_appKey = 'WpVereinsflieger_AppKey';
 	private static $option_cid = 'WpVereinsflieger_CID';
 
+	private static $option_defaultRole = 'WpVereinsflieger_DefaultRole';
+
 	/**
 	 * Removes all options previously set by the class
 	 */
@@ -16,6 +18,7 @@ class Options {
 		delete_option(self::$option_dbVersion);
 		delete_option(self::$option_appKey);
 		delete_option(self::$option_cid);
+		delete_option(self::$option_defaultRole);
 	}
 
 	/**
@@ -71,10 +74,30 @@ class Options {
 	 * @param string $cid
 	 */
 	public static function setCID(string $cid): void {
-		if (self::getAppKey() === null) {
+		if (self::getCID() === null) {
 			add_option(self::$option_cid, $cid, '', false);
 		} else {
 			update_option(self::$option_cid, $cid);
+		}
+	}
+
+	/**
+	 * Returns the role a new user is added to
+	 * @return string|null
+	 */
+	public static function getDefaultRole(): ?string {
+		return get_option(self::$option_cid, null);
+	}
+
+	/**
+	 * Sets the role a new user is added to
+	 * @param string $role
+	 */
+	public static function setDefaultRole(string $role): void {
+		if (self::getDefaultRole() === null) {
+			add_option(self::$option_defaultRole, $role, 'subscriber', false);
+		} else {
+			update_option(self::$option_defaultRole, $role);
 		}
 	}
 
