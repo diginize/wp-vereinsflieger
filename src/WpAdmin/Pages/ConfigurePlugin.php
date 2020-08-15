@@ -88,6 +88,15 @@ class ConfigurePlugin extends AbstractPage {
 				<input type="submit" name="wpvf_submit" class="button button-primary" value="Änderungen speichern">
 			</p>
 		</form>
+		<style>
+			input[type=number]::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+			input[type=number] {
+				-moz-appearance: textfield;
+			}
+		</style>
 		<?php
 	}
 
