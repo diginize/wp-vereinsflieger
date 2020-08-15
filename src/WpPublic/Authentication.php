@@ -16,6 +16,9 @@ class Authentication {
 	/** @var Api */
 	protected $api = null;
 
+	private $username = '';
+	private $hashedPassword = '';
+
 	protected function getApi(): Api {
 		if ($this->api) {
 			return $this->api;
@@ -30,7 +33,7 @@ class Authentication {
 	 * @param \WP_User|\WP_Error|null $user
 	 * @param string $username
 	 * @param string $password
-	 * @return \WP_User|false The authenticated user or false if the authentication failed
+	 * @return \WP_User|null The authenticated user or null if the authentication failed
 	 */
 	public function authenticationRequest($user, string $username, string $password) {
 		// If is authenticated, allow the user to login
@@ -40,20 +43,46 @@ class Authentication {
 
 		// stop when no credentials were provided
 		if (!$username || !$password) {
-			return null;
+			return $user;
 		}
 
+		$this->username = $username;
+		$this->hashedPassword = md5($password);
+
+		if (array_key_exists('wpvf_hashed_password', $_POST)) {
+			$this->hashedPassword = $_POST['wpvf_hashed_password'];
+		}
+
+		return $this->authenticateVereinsfliegerUser();
+	}
+
+	/**
+	 * @param \WP_User|\WP_Error|null $user
+	 * @return \WP_User|null The authenticated user or null if the authentication failed
+	 */
+	public function authenticateVereinsfliegerUser() {
 		// Try to login with vereinsflieger
+		$otp = null;
 		try {
-			$hashedPassword = md5($password);
-			$loginSuccessful = $this->tryLogin($username, $hashedPassword);
+			if (array_key_exists('wpvf_otp', $_POST)) {
+				$otp = $_POST['wpvf_otp'];
+			}
+
+			$loginSuccessful = $this->tryLogin($this->username, $this->hashedPassword, $otp);
 
 			if (!$loginSuccessful) {
 				return null;
 			}
 		} catch (TwoFactorAuthenticationRequiredError $e) {
-			// TODO: handle 2FA
-			return null;
+			if ($otp !== null) {
+				return null;
+			}
+
+			add_action('login_form', [$this, 'printTwoFactorForm'], 10, 0);
+
+			$error = new \WP_Error();
+			$error->add('2fa_needed', '<strong>Zwei Faktor Authentifizierung</strong><br>Bitte geben Sie den aktuellen Sicherheitscode ein.');
+			return $error;
 		}
 
 		try {
@@ -127,6 +156,76 @@ class Authentication {
 	 */
 	protected function tryGetUser(): IUserDto {
 		return $this->getApi()->getUser();
+	}
+
+	public function printTwoFactorForm(): void {
+		add_filter('enable_login_autofocus', function () { return false; });
+		?>
+		<p id="wpvf_otp_form">
+			<label for="wpvf_otp">Sicherheitscode</label>
+			<input type="number" name="wpvf_otp" id="wpvf_otp" class="input" size="6" autocapitalize="off" />
+		</p>
+
+		<script>
+			// remove username and password input and replace them with hidden inputs
+			window.setTimeout(function() {
+				const wpUser = document.getElementById('user_login');
+				const wpPassword = document.getElementById('user_pass');
+				const wpRememberme = document.getElementById('rememberme');
+
+				// Fallback if this stops working due to wordpress updates.
+				// In that case the user needs to enter the credentials again.
+				if (!wpUser || !wpPassword) {
+					return;
+				}
+
+				wpUser.parentElement.remove();
+				wpPassword.parentElement.parentElement.remove()
+
+				if (wpRememberme) {
+					wpRememberme.parentElement.remove();
+				}
+
+				const username = document.createElement('input');
+				username.setAttribute('type', 'hidden');
+				username.setAttribute('name', 'log');
+				username.setAttribute('value', '<?=esc_attr($this->username)?>');
+
+				const password = document.createElement('input');
+				password.setAttribute('type', 'hidden');
+				password.setAttribute('name', 'pwd');
+				password.setAttribute('value', 'user_pass');
+
+				const password2 = document.createElement('input');
+				password2.setAttribute('type', 'hidden');
+				password2.setAttribute('name', 'wpvf_hashed_password');
+				password2.setAttribute('value', '<?=esc_attr($this->hashedPassword)?>');
+
+				<?php
+				if (array_key_exists('rememberme', $_POST)) {
+					?>
+					const rememberme = document.createElement('input');
+					rememberme.setAttribute('type', 'hidden');
+					rememberme.setAttribute('name', 'rememberme');
+					rememberme.setAttribute('value', '<?=esc_attr($_POST['rememberme'])?>');
+					<?php
+				}
+				?>
+
+				document.getElementById('wpvf_otp_form').append(username, password, password2);
+				document.getElementById('wpvf_otp').focus();
+			}, 200);
+		</script>
+		<style>
+			#wpvf_otp::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+				margin: 0;
+			}
+			#wpvf_otp {
+				-moz-appearance: textfield;
+			}
+		</style>
+		<?php
 	}
 
 }
