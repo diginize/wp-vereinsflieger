@@ -40,7 +40,7 @@ class ConfigurePlugin extends AbstractPage {
 	}
 
 	private function checkConfiguration() {
-		if (!Options::getCID() || !Options::getAppKey()) {
+		if (!Options::setupComplete()) {
 			$this->addMessage('error', 'WP Vereinflieger ist noch nicht richtig konfiguriert.', false);
 		} else {
 			$this->addMessage('success', 'WP Vereinflieger ist richtig konfiguriert und einsatzbereit.', false);

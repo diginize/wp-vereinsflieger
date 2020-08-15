@@ -3,8 +3,10 @@
 /**
  * Plugin Name: WP Vereinsflieger
  * Plugin URI: https://github.com/silviokennecke/wp-vereinsflieger
+ * Donate link: https://paypal.me/diginize
+ * Tags: sso, vereinsflieger, luftsport
  * Description: Allows users to login into wordpress using their Vereinsflieger login.
- * Version: 0.0.1
+ * Version: 1.0.0
  * Author: Diginize
  * Author URI: https://www.diginize.de
  * License: GPLv3

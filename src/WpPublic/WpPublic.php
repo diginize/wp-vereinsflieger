@@ -4,6 +4,8 @@
 namespace Diginize\WpVereinsflieger\WpPublic;
 
 
+use Diginize\WpVereinsflieger\Options;
+
 class WpPublic {
 
 	/** @var Authentication */
@@ -19,7 +21,9 @@ class WpPublic {
 	}
 
 	private function setupHooks(): void {
-		add_filter('authenticate', [$this->authentication, 'authenticationRequest'], 50, 3);
+		if (Options::setupComplete()) {
+			add_filter('authenticate', [$this->authentication, 'authenticationRequest'], 50, 3);
+		}
 
 		// TODO: add config option to disable password changes for vereinsflieger users
 		// add_action('lostpassword_post', [$this->authentication, 'lostPasswordRequest'], 50, 2);

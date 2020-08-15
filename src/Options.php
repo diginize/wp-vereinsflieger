@@ -101,4 +101,13 @@ class Options {
 		}
 	}
 
+	/**
+	 * Checks if the plugin is set up correctly.
+	 * This means only that all required options are set.
+	 * @return bool
+	 */
+	public static function setupComplete(): bool {
+		return !(empty(Options::getAppKey()) || empty(Options::getCID()));
+	}
+
 }
