@@ -86,7 +86,7 @@ class Options {
 	 * @return string|null
 	 */
 	public static function getDefaultRole(): ?string {
-		return get_option(self::$option_cid, null);
+		return get_option(self::$option_defaultRole, null);
 	}
 
 	/**
