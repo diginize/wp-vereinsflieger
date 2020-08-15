@@ -6,9 +6,8 @@ namespace Diginize\WpVereinsflieger\VereinsfliegerApi\Model;
 
 interface ILoginFailedDto {
 
-	/**
-	 * @return int
-	 */
-	public function getNeed2fa(): int;
+		public function getNeed2fa(): int;
+
+		public function setNeed2fa(int $need_2fa): void;
 
 }

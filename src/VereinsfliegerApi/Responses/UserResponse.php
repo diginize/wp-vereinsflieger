@@ -38,10 +38,24 @@ class UserResponse extends VereinsfliegerResponseDto implements IUserDto {
 	}
 
 	/**
+	 * @param int $uid
+	 */
+	public function setUid(int $uid): void {
+		$this->uid = $uid;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getMemberid(): string {
 		return $this->memberid;
+	}
+
+	/**
+	 * @param string $memberid
+	 */
+	public function setMemberid(string $memberid): void {
+		$this->memberid = $memberid;
 	}
 
 	/**
@@ -52,10 +66,24 @@ class UserResponse extends VereinsfliegerResponseDto implements IUserDto {
 	}
 
 	/**
+	 * @param string $firstname
+	 */
+	public function setFirstname(string $firstname): void {
+		$this->firstname = $firstname;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getLastname(): string {
 		return $this->lastname;
+	}
+
+	/**
+	 * @param string $lastname
+	 */
+	public function setLastname(string $lastname): void {
+		$this->lastname = $lastname;
 	}
 
 	/**
@@ -66,6 +94,13 @@ class UserResponse extends VereinsfliegerResponseDto implements IUserDto {
 	}
 
 	/**
+	 * @param string $email
+	 */
+	public function setEmail(string $email): void {
+		$this->email = $email;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getStatus(): string {
@@ -73,10 +108,24 @@ class UserResponse extends VereinsfliegerResponseDto implements IUserDto {
 	}
 
 	/**
+	 * @param string $status
+	 */
+	public function setStatus(string $status): void {
+		$this->status = $status;
+	}
+
+	/**
 	 * @return string[]
 	 */
 	public function getRoles(): array {
 		return $this->roles;
+	}
+
+	/**
+	 * @param string[] $roles
+	 */
+	public function setRoles(array $roles): void {
+		$this->roles = $roles;
 	}
 
 }

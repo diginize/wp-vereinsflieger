@@ -16,4 +16,11 @@ class VereinsfliegerResponseDto implements IVereinsfliegerResponseDto {
 		return $this->httpstatuscode;
 	}
 
+	/**
+	 * @param int $httpstatuscode
+	 */
+	public function setHttpstatuscode(int $httpstatuscode): void {
+		$this->httpstatuscode = $httpstatuscode;
+	}
+
 }

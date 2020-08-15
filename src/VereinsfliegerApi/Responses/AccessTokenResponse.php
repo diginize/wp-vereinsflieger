@@ -23,10 +23,24 @@ class AccessTokenResponse extends VereinsfliegerResponseDto implements IAccessTo
 	}
 
 	/**
+	 * @param string $accesstoken
+	 */
+	public function setAccesstoken(string $accesstoken): void {
+		$this->accesstoken = $accesstoken;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getURL(): string {
 		return $this->URL;
+	}
+
+	/**
+	 * @param string $URL
+	 */
+	public function setURL(string $URL): void {
+		$this->URL = $URL;
 	}
 
 }

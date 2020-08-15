@@ -16,4 +16,11 @@ class VereinsfliegerErrorDto extends VereinsfliegerResponseDto implements IVerei
 		return $this->error;
 	}
 
+	/**
+	 * @param string $error
+	 */
+	public function setError(string $error): void {
+		$this->error = $error;
+	}
+
 }

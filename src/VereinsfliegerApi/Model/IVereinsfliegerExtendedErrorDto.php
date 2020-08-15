@@ -6,34 +6,28 @@ namespace Diginize\WpVereinsflieger\VereinsfliegerApi\Model;
 
 interface IVereinsfliegerExtendedErrorDto extends IVereinsfliegerErrorDto {
 
-	/**
-	 * @return string
-	 */
-	public function getUrl(): string;
+		public function getUrl(): string;
 
-	/**
-	 * @return string
-	 */
-	public function getPHPSESSID(): string;
+		public function setUrl(string $url): void;
 
-	/**
-	 * @return string
-	 */
-	public function getUrlpath(): string;
+		public function getPHPSESSID(): string;
 
-	/**
-	 * @return string
-	 */
-	public function getUrlfile(): string;
+		public function setPHPSESSID(string $PHPSESSID): void;
 
-	/**
-	 * @return string
-	 */
-	public function getPassphrase(): string;
+		public function getUrlpath(): string;
 
-	/**
-	 * @return string
-	 */
-	public function getAccesstoken(): string;
+		public function setUrlpath(string $urlpath): void;
+
+		public function getUrlfile(): string;
+
+		public function setUrlfile(string $urlfile): void;
+
+		public function getPassphrase(): string;
+
+		public function setPassphrase(string $passphrase): void;
+
+		public function getAccesstoken(): string;
+
+		public function setAccesstoken(string $accesstoken): void;
 
 }

@@ -6,39 +6,32 @@ namespace Diginize\WpVereinsflieger\VereinsfliegerApi\Model;
 
 interface IUserDto {
 
-	/**
-	 * @return int
-	 */
-	public function getUid(): int;
+		public function getUid(): int;
 
-	/**
-	 * @return string
-	 */
-	public function getMemberid(): string;
+		public function setUid(int $uid): void;
 
-	/**
-	 * @return string
-	 */
-	public function getFirstname(): string;
+		public function getMemberid(): string;
 
-	/**
-	 * @return string
-	 */
-	public function getLastname(): string;
+		public function setMemberid(string $memberid): void;
 
-	/**
-	 * @return string
-	 */
-	public function getEmail(): string;
+		public function getFirstname(): string;
 
-	/**
-	 * @return string
-	 */
-	public function getStatus(): string;
+		public function setFirstname(string $firstname): void;
 
-	/**
-	 * @return string[]
-	 */
-	public function getRoles(): array;
+		public function getLastname(): string;
+
+		public function setLastname(string $lastname): void;
+
+		public function getEmail(): string;
+
+		public function setEmail(string $email): void;
+
+		public function getStatus(): string;
+
+		public function setStatus(string $status): void;
+
+		public function getRoles(): array;
+
+		public function setRoles(array $roles): void;
 
 }
