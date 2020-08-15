@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== wp-vereinsflieger ===
 Contributors: skennecke
 Donate link: https://paypal.me/diginize
 Tags: sso, vereinsflieger, luftsport
