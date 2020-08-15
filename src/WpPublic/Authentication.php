@@ -53,14 +53,14 @@ class Authentication {
 			$this->hashedPassword = $_REQUEST['wpvf_hashed_password'];
 		}
 
-		return $this->authenticateVereinsfliegerUser();
+		return $this->authenticateVereinsfliegerUser($user);
 	}
 
 	/**
 	 * @param \WP_User|\WP_Error|null $user
 	 * @return \WP_User|\WP_Error|null The authenticated user or null if the authentication failed
 	 */
-	public function authenticateVereinsfliegerUser() {
+	public function authenticateVereinsfliegerUser($user) {
 		// Try to login with vereinsflieger
 		$otp = null;
 		try {
@@ -71,7 +71,7 @@ class Authentication {
 			$loginSuccessful = $this->tryLogin($this->username, $this->hashedPassword, $otp);
 
 			if (!$loginSuccessful) {
-				return null;
+				return $user;
 			}
 		} catch (TwoFactorAuthenticationRequiredError $e) {
 			if ($otp !== null) {
