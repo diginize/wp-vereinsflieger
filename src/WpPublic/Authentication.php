@@ -49,8 +49,8 @@ class Authentication {
 		$this->username = $username;
 		$this->hashedPassword = md5($password);
 
-		if (array_key_exists('wpvf_hashed_password', $_POST)) {
-			$this->hashedPassword = $_POST['wpvf_hashed_password'];
+		if (array_key_exists('wpvf_hashed_password', $_REQUEST)) {
+			$this->hashedPassword = $_REQUEST['wpvf_hashed_password'];
 		}
 
 		return $this->authenticateVereinsfliegerUser();
@@ -58,7 +58,7 @@ class Authentication {
 
 	/**
 	 * @param \WP_User|\WP_Error|null $user
-	 * @return \WP_User|null The authenticated user or null if the authentication failed
+	 * @return \WP_User|\WP_Error|null The authenticated user or null if the authentication failed
 	 */
 	public function authenticateVereinsfliegerUser() {
 		// Try to login with vereinsflieger
@@ -78,11 +78,11 @@ class Authentication {
 				return null;
 			}
 
-			add_action('login_form', [$this, 'printTwoFactorForm'], 10, 0);
+			if (!strpos($_SERVER['SCRIPT_NAME'], 'wp-login.php')) {
+				wp_safe_redirect(wp_login_url($_SERVER['REQUEST_URI']));
+			}
 
-			$error = new \WP_Error();
-			$error->add('2fa_needed', '<strong>Zwei Faktor Authentifizierung</strong><br>Bitte geben Sie den aktuellen Sicherheitscode ein.');
-			return $error;
+			return $this->twoFactorAuthenticationError();
 		}
 
 		try {
@@ -118,12 +118,13 @@ class Authentication {
 		}
 	}
 
-	/**
-	 * @param \Wp_Error $errors
-	 * @param \Wp_User|false $user_data
-	 */
-	public function lostPasswordRequest(\Wp_Error $errors, $user_data): void {
-		// TODO: check if user is allowed to reset password via wordpress
+	protected function twoFactorAuthenticationError(): \WP_Error {
+		add_action('login_form', [$this, 'printTwoFactorForm'], 10, 0);
+
+		$error = new \WP_Error();
+		$error->add('2fa_needed', '<strong>Zwei Faktor Authentifizierung</strong><br>Bitte geben Sie den aktuellen Sicherheitscode ein.');
+
+		return $error;
 	}
 
 	/**

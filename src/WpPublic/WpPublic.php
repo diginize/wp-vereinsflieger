@@ -9,9 +9,6 @@ class WpPublic {
 	/** @var Authentication */
 	private $authentication;
 
-	/** @var Profile */
-	private $profile;
-
 	public function __construct() {
 		$this->setupDependencies();
 		$this->setupHooks();
@@ -19,13 +16,13 @@ class WpPublic {
 
 	private function setupDependencies(): void {
 		$this->authentication = new Authentication();
-		//$this->profile = new Profile();
 	}
 
 	private function setupHooks(): void {
 		add_filter('authenticate', [$this->authentication, 'authenticationRequest'], 50, 3);
-		add_action('lostpassword_post', [$this->authentication, 'lostPasswordRequest'], 50, 2);
-		// TODO: filter user and password changes for vereinsflieger.de users
+
+		// TODO: add config option to disable password changes for vereinsflieger users
+		// add_action('lostpassword_post', [$this->authentication, 'lostPasswordRequest'], 50, 2);
 	}
 
 	private static $public = null;
