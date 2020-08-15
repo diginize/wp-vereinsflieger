@@ -10,7 +10,7 @@
  * Author: Diginize
  * Author URI: https://www.diginize.de
  * License: GPLv3
- * License URI: https://github.com/silviokennecke/wp-vereinsflieger/blob/master/LICENSE
+ * License URI: https://www.gnu.org/licenses/gpl-3.0.html
  */
 
 
