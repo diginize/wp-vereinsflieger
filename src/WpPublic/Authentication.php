@@ -1,10 +1,17 @@
 <?php
 
 
-namespace Diginize\WpVereinsflieger\WpAdmin;
+namespace Diginize\WpVereinsflieger;
 
 
 class Authentication {
+
+	/** @var Api */
+	protected $api;
+
+	public function __construct() {
+		$this->api = new Api();
+	}
 
 	/**
 	 * @param \WP_User|\WP_Error|null $user
@@ -17,6 +24,8 @@ class Authentication {
 		if ($user instanceof \WP_User) {
 			return $user;
 		}
+
+
 
 		// TODO: implement user check
 		// TODO: implement add new user

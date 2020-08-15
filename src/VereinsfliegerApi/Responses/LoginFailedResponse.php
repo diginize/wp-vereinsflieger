@@ -5,9 +5,9 @@ namespace Diginize\WpVereinsflieger\VereinsfliegerApi\Responses;
 
 
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\ILoginFailedDto;
-use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\VereinsfliegerResponseDto;
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\VereinsfliegerErrorDto;
 
-class LoginFailedResponse extends VereinsfliegerResponseDto implements ILoginFailedDto {
+class LoginFailedResponse extends VereinsfliegerErrorDto implements ILoginFailedDto {
 
 	/** @var int */
 	private $need_2fa;

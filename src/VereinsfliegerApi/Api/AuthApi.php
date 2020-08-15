@@ -4,17 +4,17 @@
 namespace Diginize\WpVereinsflieger\VereinsfliegerApi\Api;
 
 
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Exceptions\HttpException;
+use Diginize\WpVereinsflieger\VereinsfliegerApi\Exceptions\ApiException;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\SignInCredentialsDto;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\AccessTokenResponse;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\LoginFailedResponse;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\OkResponse;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Responses\UnauthorizedResponse;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\GuzzleException;
 
 class AuthApi extends AbstractApi {
-
-	/** @var string */
-	public $accesstoken = null;
 
 	public function __construct(?ClientInterface $client = null) {
 		parent::__construct($client);
@@ -22,78 +22,87 @@ class AuthApi extends AbstractApi {
 
 	/**
 	 * @return AccessTokenResponse
+	 * @throws HttpException
+	 * @throws ApiException
 	 */
 	public function getAccesstoken() {
 		try {
-			$response = $this->client->request('GET', $this->baseUrl . '/auth/accesstoken');
+			$response = $this->client->get('/auth/accesstoken', $this->getHttpOptions([], false));
 
 			switch ($response->getStatusCode()) {
 				case 200:
-					return $this->deserializeResponse($response->getBody(), AccessTokenResponse::class);
+					return $this->deserializeResponse($response, AccessTokenResponse::class);
 					break;
 
 				default:
-					throw new \Exception($response->getStatusCode(), $response->getStatusCode());
+					throw new ApiException($response);
 					break;
 			}
-		} catch (\Exception $e) {
-			// TODO: implement catch
+		} catch (GuzzleException $e) {
+			throw new HttpException($e);
 		}
 	}
 
 	/**
 	 * @param SignInCredentialsDto $credentials
-	 * @return OkResponse|LoginFailedResponse
+	 * @return OkResponse
+	 * @throws HttpException
+	 * @throws ApiException
 	 */
 	public function Signin(SignInCredentialsDto $credentials) {
 		try {
-			$response = $this->client->request('POST', $this->baseUrl . '/auth/signin', [
-				'form_params' => $this->serializeRequestParams($credentials),
-				'query' => ['accesstoken' => $this->accesstoken]
-			]);
+			$response = $this->client->post('/auth/signin', $this->getHttpOptions([
+				'form_params' => $this->serializeRequestParams($credentials)
+			]));
 
 			switch ($response->getStatusCode()) {
 				case 200:
-					return $this->deserializeResponse($response->getBody(), OkResponse::class);
+					return $this->deserializeResponse($response, OkResponse::class);
 					break;
 
 				case 403:
-					return $this->deserializeResponse($response->getBody(), LoginFailedResponse::class);
+					throw new ApiException(
+						$response,
+						$this->deserializeResponse($response, LoginFailedResponse::class)
+					);
 					break;
 
 				default:
-					throw new \Exception($response->getStatusCode(), $response->getStatusCode());
+					throw new ApiException($response);
 					break;
 			}
-		} catch (\Exception $e) {
-			// TODO: implement catch
+		} catch (GuzzleException $e) {
+			throw new HttpException($e);
 		}
 	}
 
 	/**
 	 * @return OkResponse|UnauthorizedResponse
+	 * @throws HttpException
+	 * @throws ApiException
 	 */
 	public function Signout() {
 		try {
-			$response = $this->client->request('DELETE', $this->baseUrl . '/auth/signout', [
-				'query' => ['accesstoken' => $this->accesstoken]
-			]);
+			$response = $this->client->delete('/auth/signout', $this->getHttpOptions());
 
 			switch ($response->getStatusCode()) {
 				case 200:
-					return $this->deserializeResponse($response->getBody(), OkResponse::class);
+					return $this->deserializeResponse($response, OkResponse::class);
 					break;
 
 				case 401:
-					return $this->deserializeResponse($response->getBody(), UnauthorizedResponse::class);
+					throw new ApiException(
+						$response,
+						$this->deserializeResponse($response, UnauthorizedResponse::class)
+					);
 					break;
 
 				default:
-					throw new \Exception($response->getStatusCode(), $response->getStatusCode());
+					throw new ApiException($response);
 					break;
 			}
-		} catch (\Exception $e) {
-			// TODO: implement catch
+		} catch (GuzzleException $e) {
+			throw new HttpException($e);
 		}
 	}
 

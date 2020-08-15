@@ -60,17 +60,17 @@ class Options {
 
 	/**
 	 * Returns the club id the api should connect to
-	 * @return int|null
+	 * @return string|null
 	 */
-	public static function getCID(): ?int {
+	public static function getCID(): ?string {
 		return get_option(self::$option_cid, null);
 	}
 
 	/**
 	 * Sets the club id the api should connect to
-	 * @param int $cid
+	 * @param string $cid
 	 */
-	public static function setCID(int $cid): void {
+	public static function setCID(string $cid): void {
 		if (self::getAppKey() === null) {
 			add_option(self::$option_cid, $cid, '', false);
 		} else {

@@ -4,13 +4,9 @@
 namespace Diginize\WpVereinsflieger\WpAdmin;
 
 
+use Diginize\WpVereinsflieger\WpAdmin\Pages\WpVereinsflieger;
+
 class WpAdmin {
-
-	/** @var Authentication */
-	private $authentication;
-
-	/** @var Profile */
-	private $profile;
 
 	public function __construct() {
 		$this->setupDependencies();
@@ -18,14 +14,10 @@ class WpAdmin {
 	}
 
 	private function setupDependencies(): void {
-		$this->authentication = new Authentication();
-		$this->profile = new Profile();
 	}
 
 	private function setupHooks(): void {
-		add_filter('authenticate', [$this->authentication, 'authenticationRequest'], 50, 3);
-		add_action('lostpassword_post', [$this->authentication, 'lostPasswordRequest'], 50, 2);
-		// TODO: filter user and password changes for vereinsflieger.de users
+		add_action('admin_menu', [WpVereinsflieger::class, 'setup']);
 	}
 
 	private static $admin = null;
