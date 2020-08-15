@@ -64,8 +64,8 @@ class Users extends AbstractDb {
 			'ID' => $userId,
 			'user_pass' => uniqid('wpvf', true),
 			'user_email' => $user->getEmail(),
+			'display_name' => $user->getFirstname() . ' ' . $user->getLastname()
 		]);
-		update_user_meta($userId, 'display_name', $user->getFirstname() . ' ' . $user->getLastname());
 		update_user_meta($userId, 'first_name', $user->getFirstname());
 		update_user_meta($userId, 'last_name', $user->getLastname());
 		$GLOBALS['wpdb']->update(
