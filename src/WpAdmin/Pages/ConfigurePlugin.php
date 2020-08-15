@@ -60,7 +60,7 @@ class ConfigurePlugin extends AbstractPage {
 				<tr>
 					<th>CID</th>
 					<td>
-						<input class="regular-text" name="wpvf_cid" type="number" value="<?=Options::getCID()?>">
+						<input class="regular-text" name="wpvf_cid" type="number" value="<?=esc_attr(Options::getCID())?>">
 						<p class="description">
 							Gib hier die ID deines Vereins aus Vereinsflieger an.<br>
 							Diesen findest du in Vereisflieger unter <a href="https://www.vereinsflieger.de/member/admin/community.php">Administration &gt; Verein</a>.
@@ -70,7 +70,7 @@ class ConfigurePlugin extends AbstractPage {
 				<tr>
 					<th>App Key</th>
 					<td>
-						<input class="regular-text" name="wpvf_appKey" type="text" value="<?=Options::getAppKey()?>">
+						<input class="regular-text" name="wpvf_appKey" type="text" value="<?=esc_attr(Options::getAppKey())?>">
 						<p class="description">
 							Der App Key wird benötigt, um die Schnittstelle von Vereinsflieger nutzen zu können.<br>
 							Solltest du noch keinen haben, kontaktiere bitte den Support von <a href="https://www.vereinsflieger.de/public/Kontakt.htm" target="_blank">Vereinsflieger.de</a>.
