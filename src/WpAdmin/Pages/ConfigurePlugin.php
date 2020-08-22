@@ -33,7 +33,7 @@ class ConfigurePlugin extends AbstractPage {
 		}
 
 		if (
-			is_numeric($_POST['wpvf_cid']) ||
+			!is_numeric($_POST['wpvf_cid']) ||
 			!preg_match('/^[a-z0-9]+$/i', $_POST['wpvf_appKey']) ||
 			!get_role($_POST['wpvf_defaultRole'])
 		) {
