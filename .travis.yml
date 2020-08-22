@@ -14,4 +14,4 @@ deploy:
   file: wp-vereinsflieger.zip
   on:
     tags: true
-  cleanup: true
+  cleanup: false
