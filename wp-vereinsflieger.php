@@ -6,7 +6,7 @@
  * Donate link: https://paypal.me/diginize
  * Tags: sso, vereinsflieger, luftsport
  * Description: Allows users to login into wordpress using their Vereinsflieger login.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Diginize
  * Author URI: https://www.diginize.de
  * License: GPLv3
