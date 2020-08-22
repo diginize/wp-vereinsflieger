@@ -2,7 +2,6 @@ os: linux
 language: php
 php:
   - '7.2'
-  - '7.3'
 
 before_script: composer install
 script: zip -r wp-vereinsflieger.zip src vendor wp-vereinsflieger.php readme.txt
@@ -14,4 +13,4 @@ deploy:
   file: wp-vereinsflieger.zip
   on:
     tags: true
-  cleanup: false
+  skip_cleanup: true
