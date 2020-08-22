@@ -1,3 +1,4 @@
+os: linux
 language: php
 php:
   - '7.2'
@@ -8,9 +9,9 @@ script: zip -r wp-vereinsflieger.zip src vendor wp-vereinsflieger.php readme.txt
 
 deploy:
   provider: releases
-  api_key:
+  token:
     secure: V/uGTDJnGUd+EmMMJwMB1wxMRAy7qJQDSqVtqcU+Qpob8V/3qqVICaSWqHI9nBedSbCgs+Itx+ctnQxXUYzLWQ01db+6Nkj9YmlihOwSDHisfY1xUbe5A2x2/mhY15O6JfO6zOKrV0jh6V1Cl/JeKsuUhUdYf3SPgJR7xIegqlxcY2YsShgAuF9GqI8HqLuloJGj0U+Tdhje9FLVEnRlgw1XJccb7ue8Sofjg/FO5WAahTwGTS1NPQlXqTqJJjdpx+MbXMOxE5R7oZhH60cmZj1/yDV0ZMJnrXV8l3L502C0n8cdZjUdbrOqdTTqQ6rilKLeZYc10BXgG142vxiRvZ1vi0ytPCn3bO946OLrOwtyEh3ZRjIcAxW47EN5cqOnKBZr6ulhmyZ4jUT8GBZ+MpL1GBUwX9osP07ehWlBg190sYwWOLUBS0w5loaMM9E284+PjPWwfn3yixxdVAmjFOw9xZ3eHEkqsreBdCmk88lft+GLm6xRyXeC6iViF7wZYntgGqTvfy1uhLWbORP51/dYHNKoIT047n8piihOrI0IECxstZVFxlKA3vw39HtfFAhT4rVaudehpkjn++4M6m2ttqqL71Oo6CSdnvH5TVpBj75k71II1o4FMup0psL7LOb8Z2O2vxWDGQIYjqnindHZHFFUYTmv9xNA5llOJY0=
   file: wp-vereinsflieger.zip
   on:
     tags: true
-  skip_cleanup: true
+  cleanup: true

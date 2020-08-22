@@ -64,8 +64,8 @@ class Authentication {
 		// Try to login with vereinsflieger
 		$otp = null;
 		try {
-			if (array_key_exists('wpvf_otp', $_POST)) {
-				$otp = $_POST['wpvf_otp'];
+			if (array_key_exists('wpvf_otp', $_POST) && preg_match('/^[0-9]{6}$/', str_replace(' ', '', $_POST['wpvf_otp']))) {
+				$otp = str_replace(' ', '', $_POST['wpvf_otp']);
 			}
 
 			$loginSuccessful = $this->tryLogin($this->username, $this->hashedPassword, $otp);

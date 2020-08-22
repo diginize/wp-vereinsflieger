@@ -32,6 +32,15 @@ class ConfigurePlugin extends AbstractPage {
 			return;
 		}
 
+		if (
+			is_numeric($_POST['wpvf_cid']) ||
+			!preg_match('/^[a-z0-9]+$/i', $_POST['wpvf_appKey']) ||
+			!get_role($_POST['wpvf_defaultRole'])
+		) {
+			$this->addMessage('error', 'Einige Eingaben sind fehlerhaft. Bitte überpüfe diese.');
+			return;
+		}
+
 		Options::setCID($_POST['wpvf_cid']);
 		Options::setAppKey($_POST['wpvf_appKey']);
 		Options::setDefaultRole($_POST['wpvf_defaultRole']);
