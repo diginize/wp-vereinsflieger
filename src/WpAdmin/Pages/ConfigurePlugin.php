@@ -62,6 +62,8 @@ class ConfigurePlugin extends AbstractPage {
 
 		<?php $this->printHeader('Konfiguration'); ?>
 
+		<?php $this->printDonationMessage(); ?>
+
 		<?php $this->printMessages(); ?>
 
 		<form action="" method="post">

@@ -48,6 +48,16 @@ abstract class AbstractPage {
 
 	}
 
+	public function printDonationMessage(): void {
+		?>
+		<div class="notice-info notice">
+
+			<p>Dieses Plugin ist für dich kostenfrei verfügbar. Trotzdem nehmen Wartung und Entwicklung des Plugins Zeit in Anspruch.<br>Daher würde ich mich über eine kleine Anerkennung in Form einer Spende sehr freuen. Nutze dafür einfach den folgenden Link: <a href="https://paypal.me/diginize">https://paypal.me/diginize</a></p>
+
+		</div>
+		<?php
+	}
+
 	/**
 	 * @param string $type success|warning|error|info
 	 * @param string $message
