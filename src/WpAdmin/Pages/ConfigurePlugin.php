@@ -41,9 +41,9 @@ class ConfigurePlugin extends AbstractPage {
 			return;
 		}
 
-		Options::setCID($_POST['wpvf_cid']);
-		Options::setAppKey($_POST['wpvf_appKey']);
-		Options::setDefaultRole($_POST['wpvf_defaultRole']);
+		Options::setCID((int) $_POST['wpvf_cid']);
+		Options::setAppKey(sanitize_key($_POST['wpvf_appKey']));
+		Options::setDefaultRole(sanitize_text_field($_POST['wpvf_defaultRole']));
 
 		$this->addMessage('success','Die Änderungen wurden erfolgreich gespeichert.');
 	}
