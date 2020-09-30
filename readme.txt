@@ -3,8 +3,8 @@ Contributors: skennecke
 Donate link: https://paypal.me/diginize
 Tags: sso, vereinsflieger, luftsport
 Requires at least: 5.0
-Tested up to: 5.4
-Stable tag: 5.3
+Tested up to: 5.5.1
+Stable tag: 5.5
 Requires PHP: 7.2.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
