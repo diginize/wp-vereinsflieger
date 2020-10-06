@@ -1,7 +1,8 @@
-=== wp-vereinsflieger ===
+=== WP Vereinsflieger ===
+Text Domain: wp-vereinsflieger
 Contributors: skennecke
 Donate link: https://paypal.me/diginize
-Tags: sso, vereinsflieger, luftsport
+Tags: SSO, Vereinsflieger, Luftsport
 Requires at least: 5.0
 Tested up to: 5.5.1
 Stable tag: 1.0.4
