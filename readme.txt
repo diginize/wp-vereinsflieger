@@ -48,7 +48,8 @@ Yes, accounts with 2FA enabled can also login using this plugin.
 == Changelog ==
 
 = 1.0.5
-Added translations
+- added icons
+- added translations
 
 = 1.0 =
 * First version
