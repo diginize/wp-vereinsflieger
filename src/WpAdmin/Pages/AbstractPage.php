@@ -52,7 +52,7 @@ abstract class AbstractPage {
 		?>
 		<div class="notice-info notice">
 
-			<p>Dieses Plugin ist für dich kostenfrei verfügbar. Trotzdem nehmen Wartung und Entwicklung des Plugins Zeit in Anspruch.<br>Daher würde ich mich über eine kleine Anerkennung in Form einer Spende sehr freuen. Nutze dafür einfach den folgenden Link: <a href="https://paypal.me/diginize">https://paypal.me/diginize</a></p>
+			<p><?php _e('This plugin is available free of charge. Anyway maintaining and development takes time.<br>Therefore I\'d be very happy for some support in terms of a donation. You can simply follow this link:'); ?> <a href="https://paypal.me/diginize">https://paypal.me/diginize</a></p>
 
 		</div>
 		<?php
@@ -81,7 +81,7 @@ abstract class AbstractPage {
 				<?php
 				if ($message['dismissible']) {
 					?>
-					<button class="notice-dismiss" type="button"><span class="screen-reader-text">Diese Meldung ausblenden.</span></button>
+					<button class="notice-dismiss" type="button"><span class="screen-reader-text"><?php _e('Dismiss'); ?></span></button>
 					<?php
 				}
 				?>

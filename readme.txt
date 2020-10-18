@@ -1,5 +1,6 @@
 === WP Vereinsflieger ===
 Text Domain: wp-vereinsflieger
+Domain Path: /languages
 Contributors: skennecke
 Donate link: https://paypal.me/diginize
 Tags: SSO, Vereinsflieger, Luftsport
