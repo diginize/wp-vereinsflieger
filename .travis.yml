@@ -13,13 +13,16 @@ jobs:
    - stage: build
      name: "pack archive"
      before_script: composer install
-     script: zip -r wp-vereinsflieger.zip src vendor wp-vereinsflieger.php readme.txt
+     script:
+       - zip -r wp-vereinsflieger.zip src vendor wp-vereinsflieger.php readme.txt
+       - zip -r wp-vereinsflieger-assets.zip wp-assets
      workspaces:
        create:
          name: plugin-build
          paths:
           - wp-vereinsflieger.zip
-     
+          - wp-vereinsflieger-assets.zip
+
    - stage: deploy
      name: "deploy to github"
      workspaces:
@@ -43,12 +46,18 @@ jobs:
      before_script:
        - sudo apt update
        - sudo apt install -y subversion
+       - svn propset svn:mime-type image/png *.png
+       - svn propset svn:mime-type image/jpeg *.jpg
+       - svn propset svn:mime-type image/svg+xml *.svg
      script:
        - unzip -d build wp-vereinsflieger.zip
+       - unzip -d assets wp-vereinsflieger-assets.zip
        - STABLE_TAG=$(awk '/^Stable tag:/ { print $3 }' build/readme.txt)
        - if [ "v${STABLE_TAG}" != $TRAVIS_TAG ]; then echo "Tag version number does not match the version number in readme.txt."; exit 1; fi;
        - svn checkout --non-interactive --trust-server-cert https://plugins.svn.wordpress.org/wp-vereinsflieger wp-svn
        - if [ -d "./wp-svn/tags/${STABLE_TAG}" ]; then echo "Version already exists in SVN repository."; exit 1; fi;
+       - rm -fr ./wp-svn/assets/*
+       - cp -r ./assets/wp-assets/* ./wp-svn/assets/
        - rm -fr ./wp-svn/trunk/*
        - cp -r ./build/* ./wp-svn/trunk/
        - mkdir "./wp-svn/tags/${STABLE_TAG}"
