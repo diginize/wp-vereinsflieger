@@ -12,10 +12,10 @@ class ConfigurePlugin extends AbstractPage {
 		return WpVereinsflieger::getSlug() . '-configure-plugin';
 	}
 	public static function getTitle(): string {
-		return 'WP Vereinflieger - Konfiguration';
+		return __('WP Vereinflieger') . ' - ' . __('Configuration');
 	}
 	public static function getMenuTitle(): string {
-		return 'Konfiguration';
+		return __('Configuration');
 	}
 
 	public static function setup(): void {
@@ -37,7 +37,7 @@ class ConfigurePlugin extends AbstractPage {
 			!preg_match('/^[a-z0-9]+$/i', $_POST['wpvf_appKey']) ||
 			!get_role($_POST['wpvf_defaultRole'])
 		) {
-			$this->addMessage('error', 'Einige Eingaben sind fehlerhaft. Bitte überpüfe diese.');
+			$this->addMessage('error', __('Some inputs are incorrect. Please check.'));
 			return;
 		}
 
@@ -45,14 +45,14 @@ class ConfigurePlugin extends AbstractPage {
 		Options::setAppKey(sanitize_key($_POST['wpvf_appKey']));
 		Options::setDefaultRole(sanitize_text_field($_POST['wpvf_defaultRole']));
 
-		$this->addMessage('success','Die Änderungen wurden erfolgreich gespeichert.');
+		$this->addMessage('success',__('Your changes were saved successfully.'));
 	}
 
 	private function checkConfiguration() {
 		if (!Options::setupComplete()) {
-			$this->addMessage('error', 'WP Vereinflieger ist noch nicht richtig konfiguriert.', false);
+			$this->addMessage('error', __('WP Vereinflieger is not configured completely.'), false);
 		} else {
-			$this->addMessage('success', 'WP Vereinflieger ist richtig konfiguriert und einsatzbereit.', false);
+			$this->addMessage('success', __('WP Vereinflieger is configured correctly and ready for work.'), false);
 		}
 	}
 
@@ -60,7 +60,7 @@ class ConfigurePlugin extends AbstractPage {
 		$this->checkConfiguration();
 		?>
 
-		<?php $this->printHeader('Konfiguration'); ?>
+		<?php $this->printHeader(__('Configuration')); ?>
 
 		<?php $this->printDonationMessage(); ?>
 
@@ -69,34 +69,34 @@ class ConfigurePlugin extends AbstractPage {
 		<form action="" method="post">
 			<table class="form-table">
 				<tr>
-					<th>CID</th>
+					<th><?php _e('CID'); ?></th>
 					<td>
 						<input class="regular-text" name="wpvf_cid" type="number" value="<?=esc_attr(Options::getCID())?>">
 						<p class="description">
-							Gib hier die ID deines Vereins aus Vereinsflieger an.<br>
-							Diesen findest du in Vereisflieger unter <a href="https://www.vereinsflieger.de/member/admin/community.php">Administration &gt; Verein</a>.
+							<?php _e('Please enter the ID number of your club in this field.'); ?><br>
+							<?php _e('This ID can be found in Vereinsflieger at <a href="https://www.vereinsflieger.de/member/admin/community.php">Administration &gt; Verein</a>.'); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th>App Key</th>
+					<th><?php _e('App Key'); ?></th>
 					<td>
 						<input class="regular-text" name="wpvf_appKey" type="text" value="<?=esc_attr(Options::getAppKey())?>">
 						<p class="description">
-							Der App Key wird benötigt, um die Schnittstelle von Vereinsflieger nutzen zu können.<br>
-							Solltest du noch keinen haben, kontaktiere bitte den Support von <a href="https://www.vereinsflieger.de/public/Kontakt.htm" target="_blank">Vereinsflieger.de</a>.
+							<?php _e('The App Key is required to authenticate against the interface of Vereinsflieger.'); ?><br>
+							<?php _e('If you don\'t have one you can <a href="https://www.vereinsflieger.de/public/Kontakt.htm" target="_blank">contact the support</a> for one.'); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th>Rolle für neue Nutzer</th>
+					<th><?php _e('Role for new users'); ?></th>
 					<td>
 						<select name="wpvf_defaultRole"><?php wp_dropdown_roles( Options::getDefaultRole() ); ?></select>
 					</td>
 				</tr>
 			</table>
 			<p class="submit">
-				<input type="submit" name="wpvf_submit" class="button button-primary" value="Änderungen speichern">
+				<input type="submit" name="wpvf_submit" class="button button-primary" value="<?php _e('Apply configuration'); ?>">
 			</p>
 		</form>
 		<style>

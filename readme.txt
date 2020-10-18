@@ -1,11 +1,12 @@
 === WP Vereinsflieger ===
 Text Domain: wp-vereinsflieger
+Domain Path: /languages
 Contributors: skennecke
 Donate link: https://paypal.me/diginize
 Tags: SSO, Vereinsflieger, Luftsport
 Requires at least: 5.0
 Tested up to: 5.5.1
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Requires PHP: 7.2.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -45,6 +46,9 @@ Sorry, currently this is not possible. For the future this is planned. You will 
 Yes, accounts with 2FA enabled can also login using this plugin.
 
 == Changelog ==
+
+= 1.0.5
+Added translations
 
 = 1.0 =
 * First version
