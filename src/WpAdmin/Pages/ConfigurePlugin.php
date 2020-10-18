@@ -96,7 +96,7 @@ class ConfigurePlugin extends AbstractPage {
 				</tr>
 			</table>
 			<p class="submit">
-				<input type="submit" name="wpvf_submit" class="button button-primary" value="<?php __('Apply configuration'); ?>">
+				<input type="submit" name="wpvf_submit" class="button button-primary" value="<?php _e('Apply configuration'); ?>">
 			</p>
 		</form>
 		<style>
