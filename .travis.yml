@@ -63,4 +63,4 @@ jobs:
        - mkdir "./wp-svn/tags/${STABLE_TAG}"
        - cp -r ./wp-svn/trunk/* "./wp-svn/tags/${STABLE_TAG}/"
        - svn add --force ./wp-svn/*
-       - svn commit --username "$SVN_USER" --password "$SVN_PASSWORD" --non-interactive --trust-server-cert -m "auto deployment from github repository (version: ${STABLE_TAG})" ./wp-svn
+       - svn commit --username "$SVN_USER" --password "$SVN_PASSWORD" --non-interactive --trust-server-cert -m "auto deployment from github repository" ./wp-svn
