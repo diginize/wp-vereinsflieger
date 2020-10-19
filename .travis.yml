@@ -51,6 +51,8 @@ jobs:
        - unzip -d assets wp-vereinsflieger-assets.zip
        - STABLE_TAG=$(awk '/^Stable tag:/ { print $3 }' build/readme.txt)
        - if [ "v${STABLE_TAG}" != $TRAVIS_TAG ]; then echo "Tag version number does not match the version number in readme.txt."; exit 1; fi;
+       - PLUGIN_VERSION=$(awk '/^ \* Version:/ { print $3 }' build/wp-vereinsflieger.php)
+       - if [ "v${PLUGIN_VERSION}" != $TRAVIS_TAG ]; then echo "Tag version number does not match the version number in wp-vereinsflieger.php."; exit 1; fi;
        - svn checkout --non-interactive --trust-server-cert https://plugins.svn.wordpress.org/wp-vereinsflieger wp-svn
        - if [ -d "./wp-svn/tags/${STABLE_TAG}" ]; then echo "Version already exists in SVN repository."; exit 1; fi;
        - rm -fr ./wp-svn/assets/*
