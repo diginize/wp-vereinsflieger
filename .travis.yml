@@ -6,7 +6,7 @@ php:
 stages:
  - build
  - name: deploy
-   if: (tag =~ ^v) AND (branch = master)
+   if: tag =~ ^v
 
 jobs:
   include:
@@ -46,9 +46,6 @@ jobs:
      before_script:
        - sudo apt update
        - sudo apt install -y subversion
-       - svn propset svn:mime-type image/png *.png
-       - svn propset svn:mime-type image/jpeg *.jpg
-       - svn propset svn:mime-type image/svg+xml *.svg
      script:
        - unzip -d build wp-vereinsflieger.zip
        - unzip -d assets wp-vereinsflieger-assets.zip
@@ -58,9 +55,12 @@ jobs:
        - if [ -d "./wp-svn/tags/${STABLE_TAG}" ]; then echo "Version already exists in SVN repository."; exit 1; fi;
        - rm -fr ./wp-svn/assets/*
        - cp -r ./assets/wp-assets/* ./wp-svn/assets/
+       - svn propset svn:mime-type image/png ./wp-svn/assets/*.png
+       - svn propset svn:mime-type image/jpeg ./wp-svn/assets/*.jpg
+       - svn propset svn:mime-type image/svg+xml ./wp-svn/assets/*.svg
        - rm -fr ./wp-svn/trunk/*
        - cp -r ./build/* ./wp-svn/trunk/
        - mkdir "./wp-svn/tags/${STABLE_TAG}"
        - cp -r ./wp-svn/trunk/* "./wp-svn/tags/${STABLE_TAG}/"
        - svn add --force ./wp-svn/*
-       - svn commit --username $SVN_USER --password $SVN_PASSWORD --non-interactive --trust-server-cert -m "auto deployment from github repository (version: ${STABLE_TAG})" ./wp-svn
+       - svn commit --username "$SVN_USER" --password "$SVN_PASSWORD" --non-interactive --trust-server-cert -m "auto deployment from github repository" ./wp-svn
