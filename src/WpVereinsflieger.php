@@ -31,6 +31,8 @@ class WpVereinsflieger {
 			return self::$wpVereinsflieger;
 		}
 
+		load_plugin_textdomain(WPVF_DOMAIN, false, dirname( plugin_basename( WPVF_BASE_FILE ) ) . '/languages' );
+
 		DbSchema::init();
 
 		$public = WpPublic::init();

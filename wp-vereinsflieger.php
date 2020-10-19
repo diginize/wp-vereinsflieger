@@ -18,6 +18,13 @@ require_once(__DIR__ . '/vendor/autoload.php');
 
 use Diginize\WpVereinsflieger\WpVereinsflieger;
 
+if (!defined('WPVF_DOMAIN')) {
+	define('WPVF_DOMAIN', 'wp-vereinsflieger');
+}
+if (!defined('WPVF_BASE_FILE')) {
+	define('WPVF_BASE_FILE', __FILE__);
+}
+
 register_activation_hook( __FILE__, [WpVereinsflieger::class, 'activate']);
 register_deactivation_hook( __FILE__, [WpVereinsflieger::class, 'deactivate']);
 register_uninstall_hook(__FILE__, [WpVereinsflieger::class, 'uninstall']);
