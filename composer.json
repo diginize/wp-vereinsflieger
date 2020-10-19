@@ -1,7 +1,7 @@
 {
 	"name": "diginize/wp-vereinsflieger",
 	"description": "A 3rd party signin plugin to use the member's Vereinsflieger login for entering the restricted content of websites from aero clubs. ",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"license": "GPL-3.0-only",
 	"authors": [
 		{
