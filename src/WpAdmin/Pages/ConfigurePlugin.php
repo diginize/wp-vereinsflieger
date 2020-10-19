@@ -12,10 +12,10 @@ class ConfigurePlugin extends AbstractPage {
 		return WpVereinsflieger::getSlug() . '-configure-plugin';
 	}
 	public static function getTitle(): string {
-		return __('WP Vereinflieger') . ' - ' . __('Configuration');
+		return __('WP Vereinflieger', WPVF_DOMAIN) . ' - ' . __('Configuration', WPVF_DOMAIN);
 	}
 	public static function getMenuTitle(): string {
-		return __('Configuration');
+		return __('Configuration', WPVF_DOMAIN);
 	}
 
 	public static function setup(): void {
@@ -37,7 +37,7 @@ class ConfigurePlugin extends AbstractPage {
 			!preg_match('/^[a-z0-9]+$/i', $_POST['wpvf_appKey']) ||
 			!get_role($_POST['wpvf_defaultRole'])
 		) {
-			$this->addMessage('error', __('Some inputs are incorrect. Please check.'));
+			$this->addMessage('error', __('Some inputs are incorrect. Please check.', WPVF_DOMAIN));
 			return;
 		}
 
@@ -45,14 +45,14 @@ class ConfigurePlugin extends AbstractPage {
 		Options::setAppKey(sanitize_key($_POST['wpvf_appKey']));
 		Options::setDefaultRole(sanitize_text_field($_POST['wpvf_defaultRole']));
 
-		$this->addMessage('success',__('Your changes were saved successfully.'));
+		$this->addMessage('success',__('Your changes were saved successfully.', WPVF_DOMAIN));
 	}
 
 	private function checkConfiguration() {
 		if (!Options::setupComplete()) {
-			$this->addMessage('error', __('WP Vereinflieger is not configured completely.'), false);
+			$this->addMessage('error', __('WP Vereinflieger is not configured completely.', WPVF_DOMAIN), false);
 		} else {
-			$this->addMessage('success', __('WP Vereinflieger is configured correctly and ready for work.'), false);
+			$this->addMessage('success', __('WP Vereinflieger is configured correctly and ready for work.', WPVF_DOMAIN), false);
 		}
 	}
 
@@ -60,7 +60,7 @@ class ConfigurePlugin extends AbstractPage {
 		$this->checkConfiguration();
 		?>
 
-		<?php $this->printHeader(__('Configuration')); ?>
+		<?php $this->printHeader(__('Configuration', WPVF_DOMAIN)); ?>
 
 		<?php $this->printDonationMessage(); ?>
 
@@ -69,34 +69,34 @@ class ConfigurePlugin extends AbstractPage {
 		<form action="" method="post">
 			<table class="form-table">
 				<tr>
-					<th><?php _e('CID'); ?></th>
+					<th><?php _e('CID', WPVF_DOMAIN); ?></th>
 					<td>
 						<input class="regular-text" name="wpvf_cid" type="number" value="<?=esc_attr(Options::getCID())?>">
 						<p class="description">
-							<?php _e('Please enter the ID number of your club in this field.'); ?><br>
-							<?php _e('This ID can be found in Vereinsflieger at <a href="https://www.vereinsflieger.de/member/admin/community.php">Administration &gt; Verein</a>.'); ?>
+							<?php _e('Please enter the ID number of your club in this field.', WPVF_DOMAIN); ?><br>
+							<?php _e('This ID can be found in Vereinsflieger at <a href="https://www.vereinsflieger.de/member/admin/community.php">Administration &gt; Verein</a>.', WPVF_DOMAIN); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th><?php _e('App Key'); ?></th>
+					<th><?php _e('App Key', WPVF_DOMAIN); ?></th>
 					<td>
 						<input class="regular-text" name="wpvf_appKey" type="text" value="<?=esc_attr(Options::getAppKey())?>">
 						<p class="description">
-							<?php _e('The App Key is required to authenticate against the interface of Vereinsflieger.'); ?><br>
-							<?php _e('If you don\'t have one you can <a href="https://www.vereinsflieger.de/public/Kontakt.htm" target="_blank">contact the support</a> for one.'); ?>
+							<?php _e('The App Key is required to authenticate against the interface of Vereinsflieger.', WPVF_DOMAIN); ?><br>
+							<?php _e('If you don\'t have one you can <a href="https://www.vereinsflieger.de/public/Kontakt.htm" target="_blank">contact the support</a> for one.', WPVF_DOMAIN); ?>
 						</p>
 					</td>
 				</tr>
 				<tr>
-					<th><?php _e('Role for new users'); ?></th>
+					<th><?php _e('Role for new users', WPVF_DOMAIN); ?></th>
 					<td>
 						<select name="wpvf_defaultRole"><?php wp_dropdown_roles( Options::getDefaultRole() ); ?></select>
 					</td>
 				</tr>
 			</table>
 			<p class="submit">
-				<input type="submit" name="wpvf_submit" class="button button-primary" value="<?php _e('Apply configuration'); ?>">
+				<input type="submit" name="wpvf_submit" class="button button-primary" value="<?php _e('Apply configuration', WPVF_DOMAIN); ?>">
 			</p>
 		</form>
 		<style>

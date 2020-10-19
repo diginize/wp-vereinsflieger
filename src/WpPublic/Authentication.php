@@ -122,7 +122,7 @@ class Authentication {
 		add_action('login_form', [$this, 'printTwoFactorForm'], 10, 0);
 
 		$error = new \WP_Error();
-		$error->add('2fa_needed', '<strong>' . __('Two factor authentication') . '</strong><br>' . __('Please enter the current one time password.'));
+		$error->add('2fa_needed', '<strong>' . __('Two factor authentication', WPVF_DOMAIN) . '</strong><br>' . __('Please enter the current one time password.', WPVF_DOMAIN));
 
 		return $error;
 	}
@@ -163,7 +163,7 @@ class Authentication {
 		add_filter('enable_login_autofocus', function () { return false; });
 		?>
 		<p id="wpvf_otp_form">
-			<label for="wpvf_otp"><?=__('One time password')?></label>
+			<label for="wpvf_otp"><?=__('One time password', WPVF_DOMAIN)?></label>
 			<input type="number" name="wpvf_otp" id="wpvf_otp" class="input" size="6" autocapitalize="off" />
 		</p>
 

@@ -1,0 +1,145 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Vereinsflieger\n"
+"POT-Creation-Date: 2020-10-19 02:31+0200\n"
+"PO-Revision-Date: 2020-10-19 02:53+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: wp-vereinsflieger.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.min.js\n"
+
+#: src/WpAdmin/Pages/AbstractPage.php:55
+msgid ""
+"This plugin is available free of charge. Anyway maintaining and development "
+"takes time.<br>Therefore I'd be very happy for some support in terms of a "
+"donation. You can simply follow this link:"
+msgstr ""
+"Dieses Plugin ist für dich kostenfrei verfügbar. Trotzdem nehmen Wartung und "
+"Entwicklung des Plugins Zeit in Anspruch.<br>Daher würde ich mich über eine "
+"kleine Anerkennung in Form einer Spende sehr freuen. Nutze dafür einfach den "
+"folgenden Link:"
+
+#: src/WpAdmin/Pages/AbstractPage.php:84
+msgid "Dismiss"
+msgstr "Ausblenden"
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:15
+msgid "WP Vereinflieger"
+msgstr "WP Vereinflieger"
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:15
+#: src/WpAdmin/Pages/ConfigurePlugin.php:18
+#: src/WpAdmin/Pages/ConfigurePlugin.php:63
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:40
+msgid "Some inputs are incorrect. Please check."
+msgstr "Einige Eingaben sind fehlerhaft. Bitte überpüfe diese."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:48
+msgid "Your changes were saved successfully."
+msgstr "Die Änderungen wurden erfolgreich gespeichert."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:53
+msgid "WP Vereinflieger is not configured completely."
+msgstr "WP Vereinflieger ist noch nicht richtig konfiguriert."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:55
+msgid "WP Vereinflieger is configured correctly and ready for work."
+msgstr "WP Vereinflieger ist richtig konfiguriert und einsatzbereit."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:72
+msgid "CID"
+msgstr "CID"
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:76
+msgid "Please enter the ID number of your club in this field."
+msgstr "Gib hier die ID deines Vereins aus Vereinsflieger an."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:77
+msgid ""
+"This ID can be found in Vereinsflieger at <a href=\"https://www."
+"vereinsflieger.de/member/admin/community.php\">Administration &gt; Verein</"
+"a>."
+msgstr ""
+"Diesen findest du in Vereisflieger unter <a href=„https://www.vereinsflieger."
+"de/member/admin/community.php“>Administration &gt; Verein</a>."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:82
+msgid "App Key"
+msgstr "App Key"
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:86
+msgid ""
+"The App Key is required to authenticate against the interface of "
+"Vereinsflieger."
+msgstr ""
+"Der App Key wird benötigt, um die Schnittstelle von Vereinsflieger nutzen zu "
+"können."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:87
+msgid ""
+"If you don't have one you can <a href=\"https://www.vereinsflieger.de/public/"
+"Kontakt.htm\" target=\"_blank\">contact the support</a> for one."
+msgstr ""
+"Solltest du noch keinen haben, kontaktiere bitte den Support von <a "
+"href=„https://www.vereinsflieger.de/public/Kontakt.htm“ "
+"target=„_blank“>Vereinsflieger.de</a>."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:92
+msgid "Role for new users"
+msgstr "Rolle für neue Nutzer"
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:99
+msgid "Apply configuration"
+msgstr "Änderungen speichern"
+
+#: src/WpPublic/Authentication.php:125
+msgid "Two factor authentication"
+msgstr "Zwei Faktor Authentifizierung"
+
+#: src/WpPublic/Authentication.php:125
+msgid "Please enter the current one time password."
+msgstr ""
+"Bitte geben Sie den aktuellen Sicherheitscode Ihres Vereinsflieger.de-"
+"Accounts ein."
+
+#: src/WpPublic/Authentication.php:166
+msgid "One time password"
+msgstr "Sicherheitscode"
+
+#. Plugin Name of the plugin/theme
+msgid "WP Vereinsflieger"
+msgstr "WP Vereinsflieger"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/silviokennecke/wp-vereinsflieger"
+msgstr "https://github.com/silviokennecke/wp-vereinsflieger"
+
+#. Description of the plugin/theme
+msgid "Allows users to login into wordpress using their Vereinsflieger login."
+msgstr ""
+"Ermöglicht Vereins-Mitgliedern sich mit ihrem Vereinsflieger-Login "
+"anzumelden."
+
+#. Author of the plugin/theme
+msgid "Diginize"
+msgstr "Diginize"
+
+#. Author URI of the plugin/theme
+msgid "https://www.diginize.de"
+msgstr "https://www.diginize.de"
