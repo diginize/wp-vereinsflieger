@@ -14,7 +14,7 @@ jobs:
      name: "pack archive"
      before_script: composer install
      script:
-       - zip -r wp-vereinsflieger.zip src vendor wp-vereinsflieger.php readme.txt
+       - zip -r wp-vereinsflieger.zip languages src vendor wp-vereinsflieger.php readme.txt
        - zip -r wp-vereinsflieger-assets.zip wp-assets
      workspaces:
        create:
