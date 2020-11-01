@@ -7,7 +7,6 @@ use Diginize\WpVereinsflieger\DbSchema\DbSchema;
 use Diginize\WpVereinsflieger\DbSchema\Users as UsersSchema;
 use Diginize\WpVereinsflieger\Options;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\IUserDto;
-use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\UserDto;
 
 
 class Users extends AbstractDb {
@@ -32,6 +31,15 @@ class Users extends AbstractDb {
 			'SELECT * FROM `' . UsersSchema::getTableName() . '` WHERE `user_email` = %s LIMIT 1',
 			$email
 		));
+	}
+
+	/**
+	 * Checks if a given user is linked to a Vereinsflieger account
+	 * @param \WP_User $user The user to be checked
+	 * @return bool
+	 */
+	public static function isVereinsfliegerUser(\WP_User $user): bool {
+		return $user->data->{UsersSchema::getColumnVfUserId()} !== null;
 	}
 
 	public static function addVereinsfliegerUser(IUserDto $user) {

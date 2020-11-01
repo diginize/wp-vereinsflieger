@@ -45,6 +45,12 @@ class ConfigurePlugin extends AbstractPage {
 		Options::setAppKey(sanitize_key($_POST['wpvf_appKey']));
 		Options::setDefaultRole(sanitize_text_field($_POST['wpvf_defaultRole']));
 
+		if (array_key_exists('wpvf_allowDefaultLogin', $_POST) && $_POST['wpvf_allowDefaultLogin'] === '1') {
+			Options::setAllowDefaultLogin(true);
+		} else {
+			Options::setAllowDefaultLogin(false);
+		}
+
 		$this->addMessage('success',__('Your changes were saved successfully.', WPVF_DOMAIN));
 	}
 
@@ -92,6 +98,20 @@ class ConfigurePlugin extends AbstractPage {
 					<th><?php _e('Role for new users', WPVF_DOMAIN); ?></th>
 					<td>
 						<select name="wpvf_defaultRole"><?php wp_dropdown_roles( Options::getDefaultRole() ); ?></select>
+					</td>
+				</tr>
+				<tr>
+					<th><?php _e('Restriction', WPVF_DOMAIN); ?></th>
+					<td>
+						<fieldset>
+							<label for="wpvf_allowDefaultLogin">
+								<input name="wpvf_allowDefaultLogin" type="checkbox" id="wpvf_allowDefaultLogin" value="1" <?php if (Options::getAllowDefaultLogin()) echo 'checked'; ?>>
+								<?php _e('Allow users linked to Vereinsflieger.de to login with their existing wordpress credentials.', WPVF_DOMAIN); ?>
+							</label>
+						</fieldset>
+						<p class="description">
+							<?php _e('Caution: When enabling this option, users that left the club might still be able to login to your member area.', WPVF_DOMAIN); ?>
+						</p>
 					</td>
 				</tr>
 			</table>

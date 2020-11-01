@@ -11,6 +11,8 @@ class Options {
 
 	private static $option_defaultRole = 'WpVereinsflieger_DefaultRole';
 
+	private static $option_allowDefaultLogin = 'WpVereinsflieger_AllowDefaultLogin';
+
 	/**
 	 * Removes all options previously set by the class
 	 */
@@ -95,9 +97,30 @@ class Options {
 	 */
 	public static function setDefaultRole(string $role): void {
 		if (self::getDefaultRole() === null) {
-			add_option(self::$option_defaultRole, $role, 'subscriber', false);
+			add_option(self::$option_defaultRole, $role, '', false);
 		} else {
 			update_option(self::$option_defaultRole, $role);
+		}
+	}
+
+	/**
+	 * Returns if a user linked to a vereinsflieger account should be able to also login with his wordpress credentials.
+	 * Default is false.
+	 * @return bool
+	 */
+	public static function getAllowDefaultLogin(): bool {
+		return get_option(self::$option_allowDefaultLogin, false);
+	}
+
+	/**
+	 * Sets if an account linked to a vereinsflieger user should be able to login using it's wordpress credentials
+	 * @param bool $isAllowed
+	 */
+	public static function setAllowDefaultLogin(bool $isAllowed): void {
+		if (self::getAllowDefaultLogin() === null) {
+			add_option(self::$option_allowDefaultLogin, $isAllowed, '', false);
+		} else {
+			update_option(self::$option_allowDefaultLogin, $isAllowed);
 		}
 	}
 
@@ -109,5 +132,7 @@ class Options {
 	public static function setupComplete(): bool {
 		return !(empty(Options::getAppKey()) || empty(Options::getCID()));
 	}
+
+
 
 }

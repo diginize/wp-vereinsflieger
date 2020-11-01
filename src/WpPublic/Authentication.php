@@ -9,6 +9,7 @@ use Diginize\WpVereinsflieger\Db\Users;
 use Diginize\WpVereinsflieger\Error\ApiError;
 use Diginize\WpVereinsflieger\Error\InvalidLoginCredentialsError;
 use Diginize\WpVereinsflieger\Error\TwoFactorAuthenticationRequiredError;
+use Diginize\WpVereinsflieger\Options;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\IUserDto;
 
 class Authentication {
@@ -38,6 +39,12 @@ class Authentication {
 	public function authenticationRequest($user, string $username, string $password) {
 		// If is authenticated, allow the user to login
 		if ($user instanceof \WP_User) {
+
+			// check if user is linked to an Vereinsflieger account
+			if (!Options::getAllowDefaultLogin() && Users::isVereinsfliegerUser($user)) {
+				return null;
+			}
+
 			return $user;
 		}
 
