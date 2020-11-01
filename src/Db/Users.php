@@ -35,13 +35,15 @@ class Users extends AbstractDb {
 	}
 
 	public static function addVereinsfliegerUser(IUserDto $user) {
+		$userLogin = DbSchema::getTablePrefix() . $user->getUid();
+		$displayName = $user->getFirstname() . ' ' . $user->getLastname();
 		$userId = wp_insert_user([
 			'user_pass' => uniqid('wpvf', true),
-			'user_login' => DbSchema::getTablePrefix() . $user->getUid(),
-			'user_nicename' => DbSchema::getTablePrefix() . $user->getUid(),
+			'user_login' => $userLogin,
+			'user_nicename' => $userLogin,
 			'user_url' => '',
 			'user_email' => $user->getEmail(),
-			'nickname' => '',
+			'nickname' => $displayName,
 			'user_registered' => date('Y-m-d H:i:s'),
 			'role' => Options::getDefaultRole()
 		]);
