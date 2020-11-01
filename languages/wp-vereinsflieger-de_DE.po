@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Vereinsflieger\n"
-"POT-Creation-Date: 2020-10-19 02:31+0200\n"
-"PO-Revision-Date: 2020-10-19 02:53+0200\n"
+"POT-Creation-Date: 2020-11-01 22:56+0100\n"
+"PO-Revision-Date: 2020-11-01 23:00+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -42,7 +42,7 @@ msgstr "WP Vereinflieger"
 
 #: src/WpAdmin/Pages/ConfigurePlugin.php:15
 #: src/WpAdmin/Pages/ConfigurePlugin.php:18
-#: src/WpAdmin/Pages/ConfigurePlugin.php:63
+#: src/WpAdmin/Pages/ConfigurePlugin.php:69
 msgid "Configuration"
 msgstr "Konfiguration"
 
@@ -50,27 +50,27 @@ msgstr "Konfiguration"
 msgid "Some inputs are incorrect. Please check."
 msgstr "Einige Eingaben sind fehlerhaft. Bitte überpüfe diese."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:48
+#: src/WpAdmin/Pages/ConfigurePlugin.php:54
 msgid "Your changes were saved successfully."
 msgstr "Die Änderungen wurden erfolgreich gespeichert."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:53
+#: src/WpAdmin/Pages/ConfigurePlugin.php:59
 msgid "WP Vereinflieger is not configured completely."
 msgstr "WP Vereinflieger ist noch nicht richtig konfiguriert."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:55
+#: src/WpAdmin/Pages/ConfigurePlugin.php:61
 msgid "WP Vereinflieger is configured correctly and ready for work."
 msgstr "WP Vereinflieger ist richtig konfiguriert und einsatzbereit."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:72
+#: src/WpAdmin/Pages/ConfigurePlugin.php:78
 msgid "CID"
 msgstr "CID"
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:76
+#: src/WpAdmin/Pages/ConfigurePlugin.php:82
 msgid "Please enter the ID number of your club in this field."
 msgstr "Gib hier die ID deines Vereins aus Vereinsflieger an."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:77
+#: src/WpAdmin/Pages/ConfigurePlugin.php:83
 msgid ""
 "This ID can be found in Vereinsflieger at <a href=\"https://www."
 "vereinsflieger.de/member/admin/community.php\">Administration &gt; Verein</"
@@ -79,11 +79,11 @@ msgstr ""
 "Diesen findest du in Vereisflieger unter <a href=„https://www.vereinsflieger."
 "de/member/admin/community.php“>Administration &gt; Verein</a>."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:82
+#: src/WpAdmin/Pages/ConfigurePlugin.php:88
 msgid "App Key"
 msgstr "App Key"
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:86
+#: src/WpAdmin/Pages/ConfigurePlugin.php:92
 msgid ""
 "The App Key is required to authenticate against the interface of "
 "Vereinsflieger."
@@ -91,7 +91,7 @@ msgstr ""
 "Der App Key wird benötigt, um die Schnittstelle von Vereinsflieger nutzen zu "
 "können."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:87
+#: src/WpAdmin/Pages/ConfigurePlugin.php:93
 msgid ""
 "If you don't have one you can <a href=\"https://www.vereinsflieger.de/public/"
 "Kontakt.htm\" target=\"_blank\">contact the support</a> for one."
@@ -100,25 +100,50 @@ msgstr ""
 "href=„https://www.vereinsflieger.de/public/Kontakt.htm“ "
 "target=„_blank“>Vereinsflieger.de</a>."
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:92
+#: src/WpAdmin/Pages/ConfigurePlugin.php:98
 msgid "Role for new users"
 msgstr "Rolle für neue Nutzer"
 
-#: src/WpAdmin/Pages/ConfigurePlugin.php:99
+#: src/WpAdmin/Pages/ConfigurePlugin.php:104
+msgid "Restriction"
+msgstr "Einschränkungen"
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:109
+msgid ""
+"Allow users linked to Vereinsflieger.de to login with their existing "
+"wordpress credentials."
+msgstr ""
+"Benutzer, die mit Vereinsflieger.de verknüpft sind, den Login mit Wordpress-"
+"Zugangsdaten erlauben."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:113
+msgid ""
+"Caution: When enabling this option, users that left the club might still be "
+"able to login to your member area."
+msgstr ""
+"Achtung: Wenn Sie diese Einstellung aktivieren, besteht die Möglichkeit, "
+"dass sich Nutzer weiterhin anmelden können, selbst wenn diese in "
+"Versinsflieger.de gelöscht wurden."
+
+#: src/WpAdmin/Pages/ConfigurePlugin.php:119
 msgid "Apply configuration"
 msgstr "Änderungen speichern"
 
-#: src/WpPublic/Authentication.php:125
+#: src/WpAdmin/WpAdmin.php:32
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: src/WpPublic/Authentication.php:132
 msgid "Two factor authentication"
 msgstr "Zwei Faktor Authentifizierung"
 
-#: src/WpPublic/Authentication.php:125
+#: src/WpPublic/Authentication.php:132
 msgid "Please enter the current one time password."
 msgstr ""
 "Bitte geben Sie den aktuellen Sicherheitscode Ihres Vereinsflieger.de-"
 "Accounts ein."
 
-#: src/WpPublic/Authentication.php:166
+#: src/WpPublic/Authentication.php:173
 msgid "One time password"
 msgstr "Sicherheitscode"
 
@@ -143,3 +168,6 @@ msgstr "Diginize"
 #. Author URI of the plugin/theme
 msgid "https://www.diginize.de"
 msgstr "https://www.diginize.de"
+
+#~ msgid "Donate"
+#~ msgstr "Spenden"

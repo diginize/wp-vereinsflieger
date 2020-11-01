@@ -7,7 +7,6 @@ use Diginize\WpVereinsflieger\DbSchema\DbSchema;
 use Diginize\WpVereinsflieger\DbSchema\Users as UsersSchema;
 use Diginize\WpVereinsflieger\Options;
 use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\IUserDto;
-use Diginize\WpVereinsflieger\VereinsfliegerApi\Model\UserDto;
 
 
 class Users extends AbstractDb {
@@ -32,6 +31,15 @@ class Users extends AbstractDb {
 			'SELECT * FROM `' . UsersSchema::getTableName() . '` WHERE `user_email` = %s LIMIT 1',
 			$email
 		));
+	}
+
+	/**
+	 * Checks if a given user is linked to a Vereinsflieger account
+	 * @param \WP_User $user The user to be checked
+	 * @return bool
+	 */
+	public static function isVereinsfliegerUser(\WP_User $user): bool {
+		return $user->data->{UsersSchema::getColumnVfUserId()} !== null;
 	}
 
 	public static function addVereinsfliegerUser(IUserDto $user) {
@@ -61,13 +69,20 @@ class Users extends AbstractDb {
 		return $userId;
 	}
 
-	public static function updateMetaData(int $userId, IUserDto $user) {
+	public static function updateMetaData(int $userId, $wpUser, IUserDto $user) {
 		wp_update_user([
 			'ID' => $userId,
-			'user_pass' => uniqid('wpvf', true),
 			'user_email' => $user->getEmail(),
 			'display_name' => $user->getFirstname() . ' ' . $user->getLastname()
 		]);
+
+		if (!property_exists($wpUser, UsersSchema::getColumnVfUserId()) || empty($wpUser->{UsersSchema::getColumnVfUserId()})) {
+			wp_update_user([
+				'ID' => $userId,
+				'user_pass' => uniqid('wpvf', true),
+			]);
+		}
+
 		update_user_meta($userId, 'first_name', $user->getFirstname());
 		update_user_meta($userId, 'last_name', $user->getLastname());
 		$GLOBALS['wpdb']->update(
