@@ -46,6 +46,14 @@ Sorry, currently this is not possible. For the future this is planned. You will 
 
 Yes, accounts with 2FA enabled can also login using this plugin.
 
+= Where can I report bugs or suggest new features?  =
+
+Please open a new issue in the GitHub repository (https://github.com/Diginize/wp-vereinsflieger).
+
+= How can I contribute to this plugin? =
+
+Contribution is always appreciated. Please have a look into our GitHub repository for further information (https://github.com/Diginize/wp-vereinsflieger).
+
 == Changelog ==
 
 = 1.0.8  =
