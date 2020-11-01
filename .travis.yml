@@ -14,8 +14,8 @@ jobs:
      name: "pack archive"
      before_script: composer install
      script:
-       - zip -r wp-vereinsflieger.zip languages src vendor wp-vereinsflieger.php readme.txt
-       - zip -r wp-vereinsflieger-assets.zip wp-assets
+       - zip -q -r wp-vereinsflieger.zip languages src vendor wp-vereinsflieger.php readme.txt
+       - zip -q -r wp-vereinsflieger-assets.zip wp-assets
      workspaces:
        create:
          name: plugin-build
@@ -47,8 +47,8 @@ jobs:
        - sudo apt update
        - sudo apt install -y subversion
      script:
-       - unzip -d build wp-vereinsflieger.zip
-       - unzip -d assets wp-vereinsflieger-assets.zip
+       - unzip -q -d build wp-vereinsflieger.zip > /dev/null
+       - unzip -q -d assets wp-vereinsflieger-assets.zip > /dev/null
        - STABLE_TAG=$(awk '/^Stable tag:/ { print $3 }' build/readme.txt)
        - if [ "v${STABLE_TAG}" != $TRAVIS_TAG ]; then echo "Tag version number does not match the version number in readme.txt."; exit 1; fi;
        - PLUGIN_VERSION=$(awk '/^ \* Version:/ { print $3 }' build/wp-vereinsflieger.php)
