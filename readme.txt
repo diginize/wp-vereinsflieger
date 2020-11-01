@@ -48,6 +48,9 @@ Yes, accounts with 2FA enabled can also login using this plugin.
 
 == Changelog ==
 
+= 1.0.8  =
+* Fix issue which changes the wordpress user's password on every login
+
 = 1.0.6 =
 * Added translations (de + en)
 

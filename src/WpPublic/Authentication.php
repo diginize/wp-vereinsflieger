@@ -108,7 +108,7 @@ class Authentication {
 			}
 
 			// update user meta data
-			Users::updateMetaData($wpUser->ID, $userDetails);
+			Users::updateMetaData($wpUser->ID, $wpUser, $userDetails);
 
 			// return user to login
 			return new \Wp_User($wpUser->ID);

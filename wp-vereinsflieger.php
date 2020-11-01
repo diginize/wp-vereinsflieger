@@ -24,6 +24,9 @@ if (!defined('WPVF_DOMAIN')) {
 if (!defined('WPVF_BASE_FILE')) {
 	define('WPVF_BASE_FILE', __FILE__);
 }
+if (!defined('WPVF_DONATE_LINK')) {
+	define('WPVF_DONATE_LINK', 'https://paypal.me/diginize');
+}
 
 register_activation_hook( __FILE__, [WpVereinsflieger::class, 'activate']);
 register_deactivation_hook( __FILE__, [WpVereinsflieger::class, 'deactivate']);
