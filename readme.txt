@@ -6,7 +6,7 @@ Donate link: https://paypal.me/diginize
 Tags: SSO, Vereinsflieger, Luftsport
 Requires at least: 5.0
 Tested up to: 5.5.3
-Stable tag: 1.0.8
+Stable tag: 1.0.9
 Requires PHP: 7.2.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -55,6 +55,9 @@ Please open a new issue in the GitHub repository (https://github.com/Diginize/wp
 Contribution is always appreciated. Please have a look into our GitHub repository for further information (https://github.com/Diginize/wp-vereinsflieger).
 
 == Changelog ==
+
+= 1.0.9 =
+* Fix an error in German translated links
 
 = 1.0.8  =
 * Fix issue which changes the wordpress user's password on every login
