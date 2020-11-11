@@ -18,6 +18,7 @@ Single-Sign-On for Vereinsflieger.de
 This plugin allows users to login with their existing account on Vereinsflieger.de.
 
 Features:
+
 * Login using your Vereinsflieger.de account
 * No extra registration for your members needed
 * Works with enabled 2 factor authentication
@@ -45,6 +46,11 @@ Sorry, currently this is not possible. For the future this is planned. You will 
 = Some of our members use 2 factor authentication, does this work? =
 
 Yes, accounts with 2FA enabled can also login using this plugin.
+
+= The login with Vereinsflieger is failing but my credentials are correct. =
+
+Please try to verify if your login form is under attack. Vereinsflieger blocks your AppKey temporary if they detect a potential DOS attack.
+You can prevent this by adding a captcha to your login form - e.g. [reCaptcha by BestWebSoft](https://wordpress.org/plugins/google-captcha/).
 
 = Where can I report bugs or suggest new features?  =
 
