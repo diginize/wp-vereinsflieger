@@ -62,6 +62,9 @@ Contribution is always appreciated. Please have a look into our GitHub repositor
 
 == Changelog ==
 
+= 1.0.10 =
+* Fix an error caused by changed behaviour of Vereinsflieger API
+
 = 1.0.9 =
 * Fix an error in German translated links
 
