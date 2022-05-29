@@ -67,7 +67,7 @@ class Authentication {
 	 * @param \WP_User|\WP_Error|null $user
 	 * @return \WP_User|\WP_Error|null The authenticated user or null if the authentication failed
 	 */
-	public function authenticateVereinsfliegerUser($user) {
+	protected function authenticateVereinsfliegerUser($user) {
 		// Try to login with vereinsflieger
 		$otp = null;
 		try {
@@ -75,7 +75,7 @@ class Authentication {
 				$otp = str_replace(' ', '', $_POST['wpvf_otp']);
 			}
 
-			$loginSuccessful = $this->tryLogin($this->username, $this->hashedPassword, $otp);
+			$loginSuccessful = $this->tryLogin($this->username, $this->hashedPassword, $otp, $user);
 
 			if (!$loginSuccessful) {
 				return $user;
@@ -135,13 +135,14 @@ class Authentication {
 	}
 
 	/**
-	 * @param string      $username
-	 * @param string      $password
-	 * @param string|null $otp
+	 * @param string                  $username
+	 * @param string                  $password
+	 * @param string|null             $otp
+	 * @param \WP_User|\WP_Error|null $user
 	 * @return bool
 	 * @throws TwoFactorAuthenticationRequiredError
 	 */
-	protected function tryLogin(string $username, string $password, ?string $otp = null): bool {
+	protected function tryLogin(string $username, string $password, ?string $otp = null, $user = null): bool {
 		try {
 			$this->getApi()->login($username, $password, $otp);
 			return true;
@@ -150,6 +151,20 @@ class Authentication {
 		} catch (TwoFactorAuthenticationRequiredError $e) {
 			throw $e;
 		} catch (ApiError $e) {
+			if (($e->getCode() >= 500 || $e->getCode() < 600) && $user instanceof \WP_Error) {
+                $user->add(
+						'vf_offline',
+						sprintf(
+								'<strong>' . __('Vereinsflieger is offline', WPVF_DOMAIN) . '</strong><br>'
+								. __('We\'re unable to verify your login credentials with Vereinsflieger. The API returned with error <i>%d %s</i>.', WPVF_DOMAIN)
+								. '<br>'
+								. __('If this problem continues to exist, please contact the administrator.', WPVF_DOMAIN),
+								$e->getCode(),
+								$e->getMessage()
+						)
+                );
+			}
+
 			return false;
 		}
 	}

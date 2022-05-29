@@ -1,17 +1,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WP Vereinsflieger\n"
-"POT-Creation-Date: 2020-11-01 22:56+0100\n"
-"PO-Revision-Date: 2020-11-02 10:15+0100\n"
+"POT-Creation-Date: 2022-05-29 13:51+0200\n"
+"PO-Revision-Date: 2022-05-29 13:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
-"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: wp-vereinsflieger.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -144,7 +144,26 @@ msgstr ""
 "Bitte geben Sie den aktuellen Sicherheitscode Ihres Vereinsflieger.de-"
 "Accounts ein."
 
-#: src/WpPublic/Authentication.php:173
+#: src/WpPublic/Authentication.php:158
+msgid "Vereinsflieger is offline"
+msgstr "Vereinsflieger ist offline"
+
+#: src/WpPublic/Authentication.php:159
+#, php-format
+msgid ""
+"We're unable to verify your login credentials with Vereinsflieger. The API "
+"returned with error <i>%d %s</i>."
+msgstr ""
+"Wir können Ihre Zugangsdaten bei Vereinsflieger nicht überprüfen. Die API "
+"gab den folgenden Fehler zurück <i>%d %s</i>."
+
+#: src/WpPublic/Authentication.php:161
+msgid "If this problem continues to exist, please contact the administrator."
+msgstr ""
+"Sollte dieses Problem weiterhin bestehen, wenden Sie sich bitte an den "
+"Administrator."
+
+#: src/WpPublic/Authentication.php:188
 msgid "One time password"
 msgstr "Sicherheitscode"
 
@@ -153,8 +172,8 @@ msgid "WP Vereinsflieger"
 msgstr "WP Vereinsflieger"
 
 #. Plugin URI of the plugin/theme
-msgid "https://github.com/silviokennecke/wp-vereinsflieger"
-msgstr "https://github.com/silviokennecke/wp-vereinsflieger"
+msgid "https://github.com/diginize/wp-vereinsflieger"
+msgstr "https://github.com/diginize/wp-vereinsflieger"
 
 #. Description of the plugin/theme
 msgid "Allows users to login into wordpress using their Vereinsflieger login."
