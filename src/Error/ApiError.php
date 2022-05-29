@@ -18,7 +18,7 @@ class ApiError extends \Exception {
 	 */
 	public function __construct($response, int $code = 0, ?Throwable $previous = null) {
 		if (is_string($response)) {
-			parent::__construct('Api Error:' . $response, $code, $previous);
+			parent::__construct($response, $code, $previous);
 		} else {
 			parent::__construct('Api Error:' . $response->getError() . "\r\n" . json_encode($response), $response->getHttpstatuscode());
 		}

@@ -5,8 +5,8 @@ Contributors: skennecke
 Donate link: https://paypal.me/diginize
 Tags: SSO, Vereinsflieger, Luftsport
 Requires at least: 5.0
-Tested up to: 5.5.3
-Stable tag: 1.0.10
+Tested up to: 6.0
+Stable tag: 1.1.0
 Requires PHP: 7.2.5
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -61,6 +61,9 @@ Please open a new issue in the GitHub repository (https://github.com/Diginize/wp
 Contribution is always appreciated. Please have a look into our GitHub repository for further information (https://github.com/Diginize/wp-vereinsflieger).
 
 == Changelog ==
+
+= 1.1.0 =
+* Enhance error reporting in case Vereinsflieger-API returns with a server error.
 
 = 1.0.10 =
 * Fix an error caused by changed behaviour of Vereinsflieger API
