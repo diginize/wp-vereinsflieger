@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  wordpress:
+    image: "wordpress:${WP_VERSION:-6.0.0}-php${PHP_VERSION:-7.4}-apache"
+    environment:
+      VIRTUAL_HOST: "wp-vereinsflieger.test"
+      WORDPRESS_DB_HOST: "mysql"
+      WORDPRESS_DB_NAME: "wordpress"
+      WORDPRESS_DB_PASSWORD: ""
+      WORDPRESS_DB_USER: "root"
+      WORDPRESS_DEBUG: "${WORDPRESS_DEBUG:-true}"
+    depends_on:
+      - "mysql"
+    ports:
+      - 8080:80
+    networks:
+      - "backend"
+    volumes:
+      - ".:/var/www/html/wp-content/plugins/wp-vereinsflieger:ro"
+
+  mysql:
+    image: "mariadb:10.2"
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "wordpress"
+      MYSQL_ROOT_PASSWORD: ""
+    networks:
+      - "backend"
+
+networks:
+  backend:
