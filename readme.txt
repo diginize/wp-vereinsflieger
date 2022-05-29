@@ -62,6 +62,9 @@ Contribution is always appreciated. Please have a look into our GitHub repositor
 
 == Changelog ==
 
+= 1.1.0 =
+* Enhance error reporting in case Vereinsflieger-API returns with a server error.
+
 = 1.0.10 =
 * Fix an error caused by changed behaviour of Vereinsflieger API
 
