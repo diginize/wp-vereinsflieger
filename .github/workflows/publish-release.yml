@@ -57,7 +57,6 @@ jobs:
           rm -fr ./wp-svn/assets/*
           cp -r ./assets/wp-assets/* ./wp-svn/assets/
           svn propset svn:mime-type image/png ./wp-svn/assets/*.png
-          svn propset svn:mime-type image/jpeg ./wp-svn/assets/*.jpg
           svn propset svn:mime-type image/svg+xml ./wp-svn/assets/*.svg
           rm -fr ./wp-svn/trunk/*
           cp -r ./build/* ./wp-svn/trunk/
