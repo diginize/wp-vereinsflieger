@@ -1,0 +1,67 @@
+name: Publish new release
+on:
+  push:
+    tags:
+      - v*
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: php-actions/composer@v6
+        with:
+          php_version: '7.2.5'
+      - name: pack plugin
+        run: |
+          zip -q -r wp-vereinsflieger.zip languages src vendor wp-vereinsflieger.php readme.txt
+          zip -q -r wp-vereinsflieger-assets.zip wp-assets
+      - uses: actions/upload-artifact@v3
+        with:
+          name: plugin-build
+          path: |
+            wp-vereinsflieger.zip
+            wp-vereinsflieger-assets.zip
+
+  depoy-gh:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: plugin-build
+      - name: deploy to github
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: wp-vereinsflieger.zip
+
+  depoy-wordpress:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: plugin-build
+      - name: deploy to wordpress
+        run: |
+          unzip -q -d build wp-vereinsflieger.zip > /dev/null
+          unzip -q -d assets wp-vereinsflieger-assets.zip > /dev/null
+          TAG=${GITHUB_REF/refs\/tags\//}
+          STABLE_TAG=$(awk '/^Stable tag:/ { print $3 }' build/readme.txt)
+          if [ "v${STABLE_TAG}" != $TAG ]; then echo "Tag version number does not match the version number in readme.txt."; exit 1; fi;
+          PLUGIN_VERSION=$(awk '/^ \* Version:/ { print $3 }' build/wp-vereinsflieger.php)
+          if [ "v${PLUGIN_VERSION}" != $TAG ]; then echo "Tag version number does not match the version number in wp-vereinsflieger.php."; exit 1; fi;
+          svn checkout --non-interactive --trust-server-cert https://plugins.svn.wordpress.org/wp-vereinsflieger wp-svn
+          if [ -d "./wp-svn/tags/${STABLE_TAG}" ]; then echo "Version already exists in SVN repository."; exit 1; fi;
+          rm -fr ./wp-svn/assets/*
+          cp -r ./assets/wp-assets/* ./wp-svn/assets/
+          svn propset svn:mime-type image/png ./wp-svn/assets/*.png
+          svn propset svn:mime-type image/jpeg ./wp-svn/assets/*.jpg
+          svn propset svn:mime-type image/svg+xml ./wp-svn/assets/*.svg
+          rm -fr ./wp-svn/trunk/*
+          cp -r ./build/* ./wp-svn/trunk/
+          mkdir "./wp-svn/tags/${STABLE_TAG}"
+          cp -r ./wp-svn/trunk/* "./wp-svn/tags/${STABLE_TAG}/"
+          svn add --force ./wp-svn/*
+          svn commit --username "$SVN_USER" --password "$SVN_PASSWORD" --non-interactive --trust-server-cert -m "auto deployment from github repository" ./wp-svn
