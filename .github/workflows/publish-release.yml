@@ -44,6 +44,9 @@ jobs:
         with:
           name: plugin-build
       - name: deploy to wordpress
+        env:
+          SVN_USER: ${{ secrets.SVN_USER }}
+          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
         run: |
           unzip -q -d build wp-vereinsflieger.zip > /dev/null
           unzip -q -d assets wp-vereinsflieger-assets.zip > /dev/null
