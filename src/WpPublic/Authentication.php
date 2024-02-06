@@ -54,6 +54,7 @@ class Authentication {
 		}
 
 		$this->username = $username;
+		$password = stripslashes($password);
 		$this->hashedPassword = md5($password);
 
 		if (array_key_exists('wpvf_hashed_password', $_REQUEST)) {
